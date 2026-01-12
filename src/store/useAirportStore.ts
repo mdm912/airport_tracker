@@ -1,0 +1,388 @@
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { Airport, FlightLogEntry, AirportType } from '../types';
+import { supabase } from '../lib/supabase';
+import type { User } from '@supabase/supabase-js';
+import Papa from 'papaparse';
+
+interface AirportState {
+    airports: Airport[];
+    user: User | null;
+    isLoading: boolean;
+    setUser: (user: User | null) => void;
+    addAirport: (airport: Airport) => Promise<void>;
+    removeAirport: (id: string) => Promise<void>;
+    syncAirports: () => Promise<void>;
+    importFlightLog: (entries: FlightLogEntry[]) => Promise<void>;
+    addManualAirport: (input: string, type: AirportType) => Promise<{
+        status: 'success' | 'ambiguous' | 'not_found';
+        candidates?: any[];
+        message?: string;
+    }>;
+    mapLayer: 'osm' | 'sectional';
+    setMapLayer: (layer: 'osm' | 'sectional') => void;
+    getAirportByCode: (code: string) => Airport | undefined;
+    clearAirports: () => Promise<void>;
+    loadUserAirports: (userId: string) => Promise<void>;
+    focusAirportId: string | null;
+    setFocusAirportId: (id: string | null) => void;
+}
+
+// Helper to fetch and normalize DB
+let cachedDB: any[] | null = null;
+
+const fetchAirportDB = async () => {
+    if (cachedDB) return cachedDB;
+
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const url = baseUrl.endsWith('/') ? `${baseUrl}airports.csv` : `${baseUrl}/airports.csv`;
+
+    console.log('Fetching airport database from:', url);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to load airport database: ${response.statusText}`);
+    const csvText = await response.text();
+
+    return new Promise<any[]>((resolve, reject) => {
+        Papa.parse(csvText, {
+            header: true,
+            skipEmptyLines: true,
+            complete: (results) => {
+                console.log(`Parsed ${results.data.length} airports from database.`);
+                cachedDB = results.data;
+                resolve(results.data as any[]);
+            },
+            error: (err: any) => reject(err)
+        });
+    });
+};
+
+export const useAirportStore = create<AirportState>()(
+    persist(
+        (set, get) => ({
+            airports: [],
+            user: null,
+            isLoading: false,
+            focusAirportId: null,
+            setFocusAirportId: (id) => set({ focusAirportId: id }),
+            mapLayer: 'sectional',
+            setMapLayer: (layer) => set({ mapLayer: layer }),
+            setUser: async (user) => {
+                const prevUser = get().user;
+                const localAirports = get().airports;
+
+                set({ user });
+
+                if (user) {
+                    console.log('User signed in:', user.email);
+                    await get().syncAirports();
+
+                    // If we just logged in and have local guest data, merge it
+                    if (!prevUser && localAirports.length > 0) {
+                        const cloudAirports = get().airports;
+                        const toSync = localAirports.filter(local =>
+                            !cloudAirports.some(cloud => cloud.code === local.code && cloud.type === local.type)
+                        );
+
+                        if (toSync.length > 0) {
+                            console.log(`Merging ${toSync.length} guest airports into account...`);
+                            const dbEntries = toSync.map(a => ({
+                                id: a.id,
+                                user_id: user.id,
+                                code: a.code,
+                                name: a.name,
+                                lat: a.lat,
+                                lng: a.lng,
+                                type: a.type,
+                                notes: a.notes,
+                                date_visited: a.dateVisited
+                            }));
+
+                            const { error } = await supabase.from('airports').insert(dbEntries);
+                            if (error) {
+                                console.error('Merge error:', error);
+                                alert(`Failed to sync guest data: ${error.message}`);
+                            } else {
+                                await get().syncAirports();
+                            }
+                        }
+                    }
+                } else {
+                    // Only clear state on explicit logout
+                    if (prevUser) {
+                        console.log('User signed out, clearing local pins.');
+                        set({ airports: [] });
+                    }
+                }
+            },
+            syncAirports: async () => {
+                const { user } = get();
+                if (!user) return;
+
+                set({ isLoading: true });
+                const { data, error } = await supabase
+                    .from('airports')
+                    .select('*')
+                    .eq('user_id', user.id);
+
+                if (error) {
+                    console.error('Sync error:', error);
+                    alert(`Cloud Sync Failed: ${error.message}\n(Please ensure you ran the SQL script in your Supabase SQL Editor)`);
+                } else {
+                    const normalized = data.map((d: any) => ({
+                        id: d.id,
+                        code: d.code,
+                        name: d.name,
+                        lat: d.lat,
+                        lng: d.lng,
+                        type: d.type as AirportType,
+                        notes: d.notes,
+                        dateVisited: d.date_visited
+                    }));
+                    set({ airports: normalized });
+                }
+                set({ isLoading: false });
+            },
+            addAirport: async (airport) => {
+                const { user } = get();
+
+                // Prevent local duplicates
+                if (get().airports.some((a) => a.code === airport.code && a.type === airport.type)) {
+                    return;
+                }
+
+                set((state) => ({
+                    airports: [...state.airports, airport],
+                    focusAirportId: airport.id
+                }));
+
+                if (user) {
+                    const { error } = await supabase.from('airports').insert({
+                        id: airport.id,
+                        user_id: user.id,
+                        code: airport.code,
+                        name: airport.name,
+                        lat: airport.lat,
+                        lng: airport.lng,
+                        type: airport.type,
+                        notes: airport.notes,
+                        date_visited: airport.dateVisited
+                    });
+                    if (error) {
+                        console.error('Supabase error:', error);
+                        alert(`Failed to save to cloud: ${error.message}`);
+                    }
+                }
+            },
+            removeAirport: async (id) => {
+                const { user, focusAirportId } = get();
+                set((state) => ({
+                    airports: state.airports.filter((a) => a.id !== id),
+                    focusAirportId: focusAirportId === id ? null : focusAirportId
+                }));
+
+                if (user) {
+                    const { error } = await supabase.from('airports').delete().eq('id', id);
+                    if (error) console.error('Supabase error:', error);
+                }
+            },
+            getAirportByCode: (code) => {
+                return get().airports.find((a) => a.code === code);
+            },
+            addManualAirport: async (input, type) => {
+                const searchStr = input.trim().toUpperCase();
+
+                try {
+                    const allAirports = await fetchAirportDB();
+
+                    // 1. Strict Code Match (Ident, IATA, Local, GPS)
+                    let entry = allAirports.find((a: any) =>
+                        a.ident === searchStr ||
+                        a.iata_code === searchStr ||
+                        a.local_code === searchStr ||
+                        a.gps_code === searchStr
+                    );
+
+                    // 2. Partial Name Match (if no exact code match)
+                    if (!entry) {
+                        const candidates = allAirports.filter((a: any) =>
+                            a.name && a.name.toUpperCase().includes(searchStr)
+                        );
+
+                        if (candidates.length === 1) {
+                            entry = candidates[0];
+                        } else if (candidates.length > 1) {
+                            return {
+                                status: 'ambiguous',
+                                candidates: candidates.slice(0, 10), // Limit results for UI
+                                message: `Multiple matches found for "${input}". Please select one:`
+                            };
+                        }
+                    }
+
+                    if (!entry) {
+                        return { status: 'not_found', message: `No exact code or name matches for "${input}".` };
+                    }
+
+                    const code = entry.ident;
+                    const existing = get().airports.find(a => a.code === code && a.type === type);
+
+                    if (existing) {
+                        return { status: 'success', message: `Airport ${code} (${entry.name}) is already in your ${type} list.` };
+                    }
+
+                    const newAirport: Airport = {
+                        id: crypto.randomUUID(),
+                        code: code,
+                        name: entry.name,
+                        lat: parseFloat(entry.latitude_deg),
+                        lng: parseFloat(entry.longitude_deg),
+                        type,
+                        dateVisited: type === 'visited' ? new Date().toISOString().split('T')[0] : undefined,
+                        notes: `Manually added: "${input}".`
+                    };
+
+                    await get().addAirport(newAirport);
+                    return { status: 'success', message: `Added ${entry.name} (${code})` };
+                } catch (e) {
+                    console.error(e);
+                    return { status: 'not_found', message: 'Database error' };
+                }
+            },
+            importFlightLog: async (entries) => {
+                const { airports, user } = get();
+                const newAirports: Airport[] = [];
+                const seenCodes = new Set(airports.map(a => a.code));
+
+                try {
+                    const allAirports = await fetchAirportDB();
+                    const lookupMap = new Map<string, any>();
+
+                    const setIfBetter = (code: string, ap: any) => {
+                        if (!code) return;
+                        const existing = lookupMap.get(code);
+                        if (!existing) {
+                            lookupMap.set(code, ap);
+                            return;
+                        }
+                        const getScore = (a: any) => {
+                            let score = 0;
+                            if (a.iso_country === 'US') score += 10;
+                            if (a.type === 'large_airport') score += 5;
+                            if (a.type === 'medium_airport') score += 3;
+                            if (a.type === 'small_airport') score += 1;
+                            if (a.ident === code) score += 20;
+                            return score;
+                        };
+                        if (getScore(ap) > getScore(existing)) {
+                            lookupMap.set(code, ap);
+                        }
+                    };
+
+                    console.log('Building lookup map...');
+                    allAirports.forEach((ap: any) => {
+                        setIfBetter(ap.ident, ap);
+                        setIfBetter(ap.icao_code, ap);
+                        setIfBetter(ap.iata_code, ap);
+                        setIfBetter(ap.gps_code, ap);
+                        setIfBetter(ap.local_code, ap);
+                    });
+
+                    console.log(`Processing ${entries.length} log entries...`);
+                    entries.forEach(entry => {
+                        const processCode = (rawCode: string) => {
+                            if (!rawCode) return;
+                            const code = rawCode.trim().toUpperCase();
+                            if (!code || seenCodes.has(code)) return;
+
+                            const data = lookupMap.get(code);
+                            if (data) {
+                                newAirports.push({
+                                    id: crypto.randomUUID(),
+                                    code: data.ident,
+                                    name: data.name,
+                                    lat: parseFloat(data.latitude_deg),
+                                    lng: parseFloat(data.longitude_deg),
+                                    type: 'visited',
+                                    dateVisited: entry.date,
+                                    notes: `Imported from flight log.`
+                                });
+                                seenCodes.add(code);
+                                seenCodes.add(data.ident);
+                            }
+                        };
+                        processCode(entry.from);
+                        processCode(entry.to);
+                    });
+
+                    console.log(`Matched ${newAirports.length} new airports.`);
+
+                    if (newAirports.length > 0) {
+                        set((state) => ({ airports: [...state.airports, ...newAirports] }));
+
+                        if (user) {
+                            console.log(`Syncing ${newAirports.length} airports to Supabase...`);
+                            const dbEntries = newAirports.map(a => ({
+                                id: a.id,
+                                user_id: user.id,
+                                code: a.code,
+                                name: a.name,
+                                lat: a.lat,
+                                lng: a.lng,
+                                type: a.type,
+                                notes: a.notes,
+                                date_visited: a.dateVisited
+                            }));
+                            const { error } = await supabase.from('airports').insert(dbEntries);
+                            if (error) {
+                                console.error('Supabase error during import:', error);
+                                alert(`Failed to sync imported data: ${error.message}`);
+                            }
+                        }
+                        alert(`Successfully added ${newAirports.length} new airports from your log!`);
+                    } else {
+                        alert('Log processed. No new airports found to add.');
+                    }
+                } catch (error) {
+                    console.error("Failed to map airports", error);
+                    alert("Error loading airport database.");
+                }
+            },
+            clearAirports: async () => {
+                const { user } = get();
+                set({ airports: [] });
+                if (user) {
+                    const { error } = await supabase.from('airports').delete().eq('user_id', user.id);
+                    if (error) console.error('Supabase error:', error);
+                }
+            },
+            loadUserAirports: async (userId) => {
+                set({ isLoading: true });
+                const { data, error } = await supabase
+                    .from('airports')
+                    .select('*')
+                    .eq('user_id', userId);
+
+                if (error) {
+                    console.error('Error loading public airports:', error);
+                } else {
+                    const normalized = data.map((d: any) => ({
+                        id: d.id,
+                        code: d.code,
+                        name: d.name,
+                        lat: d.lat,
+                        lng: d.lng,
+                        type: d.type as AirportType,
+                        notes: d.notes,
+                        dateVisited: d.date_visited
+                    }));
+                    set({ airports: normalized });
+                }
+                set({ isLoading: false });
+            },
+        }),
+        {
+            name: 'airport-storage',
+            partialize: (state) => ({ airports: state.airports }), // Don't persist user state
+        }
+    )
+);

@@ -1,0 +1,379 @@
+ForeFlight Logbook Import,This row is required for importing into ForeFlight. Do not delete or modify.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Aircraft Table,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+AircraftID,TypeCode,Year,Make,Model,GearType,EngineType,equipType (FAA),aircraftClass (FAA),complexAircraft (FAA),taa (FAA),highPerformance (FAA),pressurized (FAA),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N7369S,C182,1976,Cessna Aircraft,182P Skylane,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N248JW,C182,2021,Cessna,C182T,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,TRUE,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N5254W,C172,2006,Cessna,172,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N78440,C172,1968,Cessna,172,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N97PD,C172,,Cessna,172S,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N436SA,C150,1967,Cessna,150,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N996TA,C172,1999,Cessna,172,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N737WS,C172,1974,Cessna,172N,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N9537Q,C172,,Cessna Aircraft,172S Skyhawk,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N5232F,C172,,Cessna Aircraft,172F Skyhawk,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N795TJ,C182,,Cessna Aircraft,182Q Skylane,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N9631R,BE95,1963,Beechcraft,Travel Air,retractable_tricycle,Piston,aircraft,airplane_multi_engine_land,TRUE,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N758NF,C172,,Cessna,R172 Hawk XP,floats,Piston,aircraft,airplane_single_engine_sea,TRUE,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N786SA,C172,,Cessna,172,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N513WF,C172,2004,Cessna,172,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N435SP,C172,,Cessna,172s,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N5344K,C172,,Cessna,172K,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N326ME,C172,,Cessna,172,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N783B,BE95,1958,Beech,Travel Air,retractable_tricycle,Piston,aircraft,airplane_multi_engine_land,TRUE,,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+N735LH,C182,,Cessna,182,fixed_tricycle,Piston,aircraft,airplane_single_engine_land,,TRUE,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Flights Table , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,Deprecated: Do not edit manually,Deprecated: Do not edit manually,Deprecated: Do not edit manually,Deprecated: Do not edit manually,Deprecated: Do not edit manually
+Date,AircraftID,From,To,Route,TimeOut,TimeOff,TimeOn,TimeIn,OnDuty,OffDuty,TotalTime,PIC,SIC,Night,Solo,CrossCountry,PICUS,MultiPilot,IFR,Examiner,NVG,NVG Ops,Distance,ActualInstrument,SimulatedInstrument,HobbsStart,HobbsEnd,TachStart,TachEnd,Holds,Approach1,Approach2,Approach3,Approach4,Approach5,Approach6,DualGiven,DualReceived,SimulatedFlight,GroundTraining,GroundTrainingGiven,InstructorName,InstructorComments,Person1,Person2,Person3,Person4,Person5,Person6,PilotComments,Flight Review (FAA),IPC (FAA),Checkride (FAA),FAA 61.58 (FAA),NVG Proficiency (FAA),Takeoff Day,Landing Full-Stop Day,Landing Touch-and-Go Day Towered,DayTakeoffs,DayLandingsFullStop,NightTakeoffs,NightLandingsFullStop,AllLandings
+2025-11-29,N735LH,KRNT,KRNT,0S9,,,,,,,1.2,1.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,82.80,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Ian McDaniel;Passenger;ian@themcdaniels.net;(425) 679-1687,,,,,,,,,,,,,,,2,2,0,0,2
+2025-11-28,N783B,S50,S50,,,,,,,,1.1,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.1,0.0,0.0,0.0,Amir Manouchehrian,"""Steep turn, engine failure demo and practice, pattern and landing. """,Amir Manouchehrian;Instructor;Westsideair1@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-11-21,N783B,S50,S50,KRNT,22:02,22:17,23:15,23:30,,,1.3,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,Amir Manouchehrian,"""Steep turns, pattern, multiple touch and go at KRNT""",,,,,,,,,,,,,8,1,8,8,1,0,0,9
+2025-11-20,N783B,S50,S50,,,,,,,,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.0,0.0,0.0,0.0,Amir Manouchehrian,"""Steep turns, slow flight, power-off stall, drag demo, pattern, landing""",Amir Manouchehrian;Instructor;Westsideair1@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-11-19,N783B,S50,S50,,,,,,,,1.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.1,0.0,0.0,0.0,Amir Manouchehrian,"""Single engine demo, steep turns, slow flight, power-off stall, pattern and landing""",Amir Manouchehrian;Instructor;Westsideair1@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-11-18,N783B,S50,S50,,,,,,,,1.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.2,0.0,0.0,0.0,Amir Manouchehrian,"""Single engine demo, steep turns, slow flight, power-off stall, pattern and landing""",Amir Manouchehrian;Instructor;Westsideair1@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-11-11,N326ME,KRNT,KRNT,KTIW ,,,,,,,1.9,1.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,40.10,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Bonnie McDaniel;Passenger;;,,,,,,"""Hub lunch and fall color tour """,,,,,,2,2,,2,2,0,0,2
+2025-10-30,N5344K,KRNT,KRNT,,21:33,21:33,22:38,22:38,,,1.1,1.1,0.0,0.0,1.1,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,5,1,4,5,1,0,0,5
+2025-10-28,N5344K,KRNT,KRNT,,21:30,21:30,22:41,22:41,,,1.5,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.5,0.0,0.0,0.0,Cody Hargreaves,"""61.127(b)1)
+(i) Preflight preparation;
+(ii) Preflight procedures;
+(iii) Airport and seaplane base operations;
+(iv) Takeoffs, landings, and go-arounds;
+(v) Performance maneuvers;
+(vi) Ground reference maneuvers;
+(xi) Postflight procedures.
+
+Soft field takeoff
+Chandelle's 
+Steep spiral
+Lazy eights
+Power off 180 landings 
+Forward slip to landing""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,3,1,0,0,3
+2025-10-16,N435SP,KPAE,KPAE,,02:02,02:19,03:15,03:30,,,1.3,1.3,0.0,1.3,1.3,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,"""Night landings for commercial""",,,,,,,,,0,0,10,10,10
+2025-10-16,N435SP,KPAE,KPAE,KAWO KBVS ,16:59,17:16,18:45,19:00,,,1.8,1.8,0.0,0.0,1.8,0.0,0.0,0.0,0.0,0.0,0.0,0,71.60,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,1,1,0,0,10
+2025-10-14,N513WF,KRNT,KRNT,KPDX,,,,,,,3.0,3.0,0.0,3.0,0.0,3.0,0.0,0.0,0.0,0.0,0.0,0,230.80,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,3.0,0.0,0.0,0.0,Cody Hargreaves,"""61.127(b)1)
+(i) Preflight preparation;
+(ii) Preflight procedures;
+(iii) Airport and seaplane base operations;
+(iv) Takeoffs, landings, and go-arounds;
+(vii) Navigation;
+(x) High-altitude operations; and
+(xi) Postflight procedures.
+
+61.129(a)(3)(iv) XC Flight""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,0,0,2,2,2
+2025-10-12,N5344K,KRNT,KRNT,S50,,,,,,,1.5,1.5,0.0,0.0,1.5,,0.0,0.0,0.0,0.0,0.0,0,19.90,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,13,1,0,0,13
+2025-10-09,N5344K,KRNT,KRNT,,,,,,,,1.5,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.5,0.0,0.0,0.0,Cody Hargreaves,"""61.127(b)1)
+(i) Preflight preparation;
+(ii) Preflight procedures;
+(iii) Airport and seaplane base operations;
+(iv) Takeoffs, landings, and go-arounds;
+(v) Performance maneuvers;
+(vi) Ground reference maneuvers;
+(viii) Slow flight and stalls;
+(xi) Postflight procedures.
+
+Slow flight
+8s on pylons
+Chandelle's 
+Lazy 8s
+Short field landings""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,4,1,0,0,4
+2025-10-07,N786SA,KRNT,KRNT,KFHR,,,,,,,2.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0,139.70,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Dennis Geels;Passenger;geels@google.com;+1 (425) 698-0234,,,,,,,,,,,,,,,2,2,0,0,2
+2025-10-06,N5344K,KRNT,KRNT,,,,,,,,1.4,1.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.4,0.0,0.5,0.0,Cody Hargreaves,"""61.127(b)1)
+(i) Preflight preparation;
+(ii) Preflight procedures;
+(iii) Airport and seaplane base operations;
+(iv) Takeoffs, landings, and go-arounds;
+(v) Performance maneuvers;
+(viii) Slow flight and stalls;
+(xi) Postflight procedures.
+
+Soft field takeoff
+Steep turns
+Chandelle
+Lazy 8s
+Steep spiral
+Power off 180s""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,4,4,0,0,4
+2025-10-06,N9631R,KRNT,KRNT,S50 KHIO ,,,,,,,2.6,0.0,0.0,0.0,0.0,2.6,0.0,0.0,0.0,0.0,0.0,0,242.20,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,2.6,0.0,0.0,0.0,John Frischkorn,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,Josh Weinstein;Passenger;;+12062765677,,,,,,,,,,,,,,3,3,0,0,3
+2025-09-25,N758NF,W36,W36,,,,,,,,1.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.7,0.0,0.0,0.0,,,Oren Peterson;Instructor;zzospzz@gmail.com;+1 (541) 579-0746,,,,,,,,,,,,,,,6,6,0,0,6
+2025-09-22,N795TJ,KRNT,KRNT,KPAE,,,,,,,2.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,50.00,0.0,0.6,0.00,0.00,0.00,0.00,1,1;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;VOR-A;16R;KPAE;;,,,,,0.0,2.0,0.0,0.5,0.0,Cody Hargreaves,"""BEFA 182 IFR checkout""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,4,1,0,0,4
+2025-08-24,N5232F,S43,S43,0S9,,,,,,,0.9,0.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Chris Gilbert;Passenger;;,,,,,,,,,,,,,,,2,2,0,0,2
+2025-08-22,N9537Q,KRNT,KRNT,0S9 KFHR ,,,,,,,2.3,2.3,0.0,0.0,0.0,2.3,0.0,0.0,0.0,0.0,0.0,0,140.60,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Ian McDaniel;Passenger;ian@themcdaniels.net;(425) 679-1687,Bonnie McDaniel;Passenger;;,,,,,,,,,,,,,,3,3,0,0,3
+2025-08-16,N513WF,KBUR,KRNT,VNY3.TWINE V23 FRAME T331 NTELL LIN V23 SAC V392 AUDIO KAUN RBL ACV OTH 77S CVO V495 UBG V165 OLM ,17:36,18:00,20:53,21:08,,,9.0,9.0,0.0,0.7,0.0,9.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.3,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Ian McDaniel;Passenger;ian@themcdaniels.net;(425) 679-1687,,,,,,,,,,,,,,,3,3,0,0,3
+2025-08-16,N513WF,KLGB,KBUR,DODGR V459 BERRI,16:08,16:26,16:51,17:06,,,1.0,1.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0,27.80,0.3,0.0,0.00,0.00,0.00,0.00,0,1;ILS Z OR LOC Z RWY 08;08;KBUR;;,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2025-08-15,N513WF,KLGB,KLGB,KLGB STATE COLLEGE-VPLSC DANA POINT-VPLDP HUNTINGTON PIER-VPLHP QUEEN MARY-VPLQM ANGELS GATE POINT VICENTE EL SEGUNDO REFINERY KLGB,20:45,21:15,22:09,22:24,,,1.4,1.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Athena Osborne;Passenger;;+14256105882,James Osborne;Passenger;josborne@gmail.com;(425) 830-0292,,,,,,,,,,,,,,1,1,0,0,1
+2025-08-12,N513WF,KRNT,KLGB,OLM V165 UBG V495 77S CURTI V23 RBL JITIM T263 SGD KSQL OSI V25 SNS T259 AVE V137 GMN LHS SAUGS V459 DODGR  ,15:37,16:01,18:15,18:30,,,10.0,10.0,0.0,0.0,10.0,10.0,0.0,0.0,0.0,0.0,0.0,0,932.20,0.1,0.0,0.00,0.00,0.00,0.00,0,1;ILS OR LOC RWY 30;30;KLGB;;,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,"""ILS FAF in the clouds though not much else was!""",,,,,,,,,3,3,0,0,3
+2025-07-28,N795TJ,KRNT,KRNT,KPAE KPWT,,,,,,,1.7,1.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,,1.0,0.00,0.00,0.00,0.00,0,1;RNAV (GPS) RWY 34;34;KRNT;;,1;ILS OR LOC RWY 20;20;KPWT;;,,,,,0.0,1.7,0.0,0.0,0.0,Cody Hargreaves,"""C182 Instrument training""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-07-26,N513WF,KRNT,KRNT,KFHR,,,,,,,2.3,2.3,0.0,0.0,2.3,2.3,0.0,0.0,0.0,0.0,0.0,0,143.40,0.3,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,"""First solo IFR flight""",,,,,,,,,2,2,0,0,2
+2025-07-23,N735LH,KRNT,KRNT,KPWT,,,,,,,2.1,2.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,44.70,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,2.1,0.0,0.0,0.0,Cody Hargreaves,"""C182 familiarization
+Slow flight
+Stalls
+Steep turns
+Touch n go landings
+Short field takeoff """,Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,6,2,0,0,6
+2025-06-29,N513WF,KRNT,KRNT,S43 KFHR S43,,,,,,,3.0,3.0,0.0,0.0,0.0,3.0,0.0,0.0,0.0,0.0,0.0,0,155.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Chris Gilbert;Passenger;;,,,,,,,,,,,,,,,4,4,0,0,4
+2025-06-19,N9537Q,KRNT,KRNT,,,,,,,,1.4,1.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.4,0.0,0.0,0.0,Cody Hargreaves,"""BEFA right seat checkout. Slow flight, stalls, steep turns. Short/soft field takeoffs and landings. Power out 180 landing""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,4,1,0,0,4
+2025-05-30,N326ME,KRNT,KRNT,S93,,,,,,,2.1,2.1,0.0,0.0,0.0,2.1,0.0,0.0,0.0,0.0,0.0,0,114.40,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,2.1,0.0,0.5,0.0,Cody Hargreaves,"""BEFA Mountain checkout""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,2,2,0,0,2
+2025-05-26,N737WS,KPAE,KPAE,,,,,,,,0.6,0.6,0.0,0.0,0.6,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,3,1,0,0,3
+2025-05-04,N513WF,KTMK,KRNT,,20:33,20:41,22:18,22:33,,,1.9,1.9,0.0,0.0,0.0,1.9,0.0,0.0,0.0,0.0,0.0,0,141.60,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Bonnie McDaniel;Passenger;;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-05-02,N513WF,KAST,KAST,,,,,,,,0.3,0.3,0.0,0.3,0.3,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,"""Night currency""",,,,,,,,,0,1,3,2,3
+2025-05-01,N513WF,KRNT,KTMK,KAST ,,,,,,,2.1,2.1,0.0,0.9,,2.1,0.0,0.0,0.0,0.0,0.0,0,149.90,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Bonnie McDaniel;Passenger;;,,,,,,,,,,,,,,,1,0,0,1,1
+2025-05-01,N513WF,KRNT,KRNT,0S9,,,,,,,1.5,1.5,0.0,0.0,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0,82.80,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2025-05-01,N513WF,0S9,0S9,KCLM,,,,,,,1.5,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,56.00,0.0,1.0,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 27;27;KCLM;;,1;ILS OR LOC RWY 09;09;KCLM;;,1;RNAV (GPS)-A;27;0S9;;CIRCLE,,,,0.0,0.0,0.0,0.0,0.0,Summer Martell,"""instrument Airplane certificate issued """,Summer Martell;Examiner;SUMMERMARTELL@HOTMAIL.COM;3605311726,,,,,,"""Instrument checkride!""",,,TRUE,,,,,,1,1,0,0,1
+2025-04-29,N513WF,KRNT,KRNT,KPAE,20:09,20:14,21:21,21:36,,,1.5,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,49.40,0.5,0.6,0.00,0.00,0.00,0.00,0,2;RNAV (GPS) RWY 34L;34L;KPAE;;,1;RNAV (GPS) Z RWY 16;16;KRNT;;,,,,,0.0,1.5,0.0,0.0,0.0,Cody Hargreaves,"""61.65(c)
+(1) Preflight preparation;
+(2) Preflight procedures;
+(3) Air traffic control clearances and procedures;
+(4) Flight by reference to instruments;
+(5) Navigation systems;
+(6) Instrument approach procedures;
+(7) Emergency operations; and
+(8) Postflight procedures.
+
+61.129 commercial instrument""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-04-27,,,,,,,,,,,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,2.0,0.0,Cody Hargreaves,"""61.65 (b)
+(1) Federal Aviation Regulations of this chapter that apply to flight operations under IFR;
+(2) Appropriate information that applies to flight operations under IFR in the “Aeronautical Information Manual;”
+(3) Air traffic control system and procedures for instrument flight operations;
+(4) IFR navigation and approaches by use of navigation systems;
+(5) Use of IFR en route and instrument approach procedure charts;
+(6) Procurement and use of aviation weather reports and forecasts and the elements of forecasting weather trends based on that information and personal observation of weather conditions;
+(7) Safe and efficient operation of aircraft under instrument flight rules and conditions;
+(8) Recognition of critical weather situations and windshear avoidance;
+(9) Aeronautical decision making and judgment; and
+(10) Crew resource management, including crew communication and coordination.""",,,,,,,,,,,,,,,,0,,0,0,0
+2025-04-26,N513WF,KRNT,KRNT,KPAE ,18:17,18:26,19:40,19:55,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,49.50,0.2,1.0,0.00,0.00,0.00,0.00,0,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;VOR-A;  16R;KPAE;;,,,,0.0,1.6,0.0,0.0,0.0,adam tomlinson,,Adam Tomlinson;Instructor;nosnilmotmada@gmail.com;+1 (253) 249-9298,,,,,,,,,,,,,,,1,1,0,0,1
+2025-04-24,N513WF,KRNT,KRNT,KPAE KPWT ,23:52,23:52,01:19,01:19,,,1.9,1.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,79.30,,1.5,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 34L;34L;KPAE;;,1;RNAV (GPS) RWY 34;34;KRNT;;,1;ILS OR LOC RWY 20;20;KPWT;;CIRCLE,,,,0.0,1.9,0.0,0.0,0.0,Adam Tomlinson,,Adam Tomlinson;Instructor;nosnilmotmada@gmail.com;+1 (253) 249-9298,,,,,,,,,,,,,,,1,1,0,0,1
+2025-04-22,N513WF,KRNT,KRNT,KPAE KPWT,21:07,21:14,22:32,22:47,,,1.8,1.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.2,0.00,0.00,0.00,0.00,0,1;RNAV (GPS) RWY 34L;34L;KPAE;;,1;RNAV (GPS) RWY 34;34;KRNT;;,1;ILS OR LOC RWY 20;20;KPWT;;CIRCLE,,,,0.0,1.8,0.0,0.0,0.0,Cody Hargreaves,"""61.65(c)
+(1) Preflight preparation;
+(2) Preflight procedures;
+(3) Air traffic control clearances and procedures;
+(4) Flight by reference to instruments;
+(5) Navigation systems;
+(6) Instrument approach procedures;
+(7) Emergency operations; and
+(8) Postflight procedures.
+
+61.129 commercial instrument""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-04-19,N513WF,KRNT,KRNT,KAWO KPAE,,,,,,,2.5,2.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,81.20,0.0,1.8,0.00,0.00,0.00,0.00,2,2;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;RNAV (GPS) RWY 34L;34L;KPAE;;,1;LOC RWY 34;34;KAWO;Circle 16;CIRCLE,1;LOC RWY 34;34;KAWO;;,,0.0,2.5,0.0,0.0,0.0,Cody Hargreaves,"""Checkride prep
+61.65(c)
+(1) Preflight preparation;
+(2) Preflight procedures;
+(3) Air traffic control clearances and procedures;
+- Pickup IFR clerance in the air
+(4) Flight by reference to instruments;
+- Hand flying w/ & w/o use of F/D and A/P
+(5) Navigation systems;
+- LOC, ILS, RNAV approaches
+(6) Instrument approach procedures;
+- LOC, ILS, RNAV approaches
+(7) Emergency operations; and
+- Partial Panel approach
+(8) Postflight procedures.
+
+61.129 commercial instrument""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-04-14,N9537Q,KRNT,KRNT,,,,,,,,1.4,1.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.8,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 34;34;KRNT;;,,,,,,0.0,1.4,0.0,0.0,0.0,Cody Hargreaves,"""""Oscar"" pattern for scan proficiency
+Steep turns
+Unusual attitudes
+Unplanned holding
+RNAV approach
+
+61.65 and 61.129 instrument training""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-04-12,N5254W,KRNT,KRNT,KPAE,,,,,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,25.00,0.0,1.1,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;VOR-A;;KPAE;;,,,,0.0,1.6,0.0,0.0,0.0,adam tomlinson,,Adam Tomlinson;Instructor;nosnilmotmada@gmail.com;+1 (253) 249-9298,,,,,,,,,,,,,,,1,1,0,0,1
+2025-03-27,N436SA,S50,S50,,,,,,,,0.6,0.6,0.0,0.0,0.6,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,3,2,0,0,3
+2025-03-27,N513WF,KRNT,KRNT,KAWO KPAE,,,,,,,1.9,1.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.5,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;LOC RWY 34;34;KAWO;Circle to 11;,,,,0.0,1.9,0.0,0.0,0.0,Cody Hargreaves,"""Instrument checkride prep.
+Partial panel RNAV at RNT
+61.65 and 61.129 instrument training""",,,,,,,,,,,,,,,,2,0,0,0,2
+2025-03-25,N513WF,KRNT,KRNT,KCLM 0S9 ,,,,,,,2.4,2.4,0.0,1.1,0.0,2.4,0.0,0.0,0.0,0.0,0.0,0,133.50,0.0,0.3,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 27;27;KCLM;;,1;RNAV (GPS)-A;;0S9;;CIRCLE,1;ILS OR LOC RWY 09;09;KCLM;;,,,,0.0,2.4,0.0,0.0,0.0,Cody Hargreaves,"""61.65 and 61.129 instrument training
+IFR checkride prep""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,0,0,1,2
+2025-03-24,N513WF,KRNT,KRNT,KAWO KPAE,,,,,,,1.9,1.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,81.20,1.4,0.0,0.00,0.00,0.00,0.00,1,2;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;LOC RWY 34;34;KAWO;;,,,,0.0,1.9,0.0,0.0,0.0,Cody Hargreaves,"""IFR checkride prep
+61.65 and 61.129 instrument training """,Cody Hargreaves;Passenger;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-03-21,N513WF,KRNT,KRNT,KPAE,,,,,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.2,1.0,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;VOR-A;;KPAE;;,,,,0.0,1.6,0.0,0.0,0.0,Cody Hargreaves,"""IFR checkride prep
+61.65 and 61.129 instrument training """,Cody Hargreaves;Passenger;cody.hargreaves@gmail.com;,,,,,,"""IFR checkride prep""",,,,,,,,,1,1,0,0,1
+2025-03-18,N97PD,KRNT,KRNT,,16:13,16:38,18:02,18:17,,,1.8,1.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.2,1.3,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 02;02;KPWT;;,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;ILS OR LOC RWY 17;17;KTIW;;,,,,0.0,1.8,0.0,0.0,0.0,Cody Hargreaves,"""IFR checkride prep
+61.65 and 61.129 instrument training """,Cody Hargreaves;Passenger;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-03-12,N513WF,KRNT,KRNT,,,,,,,,0.8,0.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.2,0.0,0.00,0.00,0.00,0.00,0,1;RNAV (GPS) Z RWY 16;16;KRNT;;,,,,,,0.0,0.8,0.0,0.0,0.0,Adam Tomlinson,,Adam Tomlinson;Instructor;nosnilmotmada@gmail.com;+1 (253) 249-9298,,,,,,"""Diverted back to RNT for ice concerns""",,,,,,,,,1,1,0,0,1
+2025-03-11,N513WF,KRNT,KRNT,KAWO KPAE,,,,,,,1.5,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,81.20,0.0,1.0,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;LOC RWY 34;34;KAWO;;,,,,0.0,1.5,0.0,0.0,0.0,Cody Hargreaves,"""IFR checkride prep
+61.65 and 61.129 instrument training""",Cody Hargreaves;Passenger;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-03-07,N513WF,KRNT,KRNT,KPAE,,,,,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,50.00,0.5,0.6,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) Z RWY 16;16;KRNT;;,1;ILS Y OR LOC Y RWY 16R;16R;KPAE;;,1;VOR-A;;KPAE;;,,,,0.0,1.6,0.0,0.0,0.0,Cody Hargreaves,"""Checkride prep
+Multiple approaches, hand flying and A/P usage. Partial panel LPV by dimming down G3X displays and using G5/GTN750 for navigation
+
+61.65 and 61.129 instrument training""",Cody Hargreaves;Passenger;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2025-03-03,,,,,,,,,,,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,5.0,0.0,,,,,,,,,"""Instrument rating logged training""",,,,,,,,,0,0,0,0,0
+2025-02-28,N513WF,KRNT,KRNT,KPAE,,,,,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,50.00,0.0,1.0,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 34L;34L;KPAE;;,,,,,,0.0,1.6,0.0,0.0,0.0,Cody Hargreaves,"""FAR 61.65(c)
+
+(1) Preflight preparation;
+
+(2) Preflight procedures;
+
+(3) Air traffic control clearances and procedures;
+
+(4) Flight by reference to instruments;
+
+(5) Navigation systems;
+
+(6) Instrument approach procedures;
+
+(7) Emergency operations; and
+
+(8) Postflight procedures.
+
+61.129 commercial instrument training""",Cody Hargreaves;Passenger;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,2,1,0,0,1
+2025-02-27,N513WF,KRNT,KRNT,KPAE,,,,,,,1.9,1.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,50.00,0.0,1.5,0.00,0.00,0.00,0.00,1,,,,,,,0.0,1.9,0.0,1.0,0.0,Cody Hargreaves,"""61.65(c)
+1) Preflight preparation;
+
+(2) Preflight procedures;
+
+(3) Air traffic control clearances and procedures;
+
+(4) Flight by reference to instruments;
+
+(5) Navigation systems;
+
+(6) Instrument approach procedures;
+
+(8) Postflight procedures.
+
+61.129 commercial instrument training""",Cody Hargreaves;Instructor;cody.hargreaves@gmail.com;,,,,,,,,,,,,,,,2,2,0,0,2
+2025-02-21,N513WF,KRNT,KRNT,,,,,,,,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.0,0.0,0.0,0.0,Steven Kann,,Steve Kann;Instructor;stevek@stevek.com;+1 (516) 503-0266,,,,,,,,,,,,,,,1,1,0,0,1
+2025-01-20,N436SA,S50,S50,KTIW,,,,,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,29.60,0.0,1.0,0.00,0.00,0.00,0.00,0,1;RNAV (GPS) RWY 35;35;KTIW;;,1;RNAV (GPS) RWY 35;35;S50;;,,,,,0.0,1.6,0.0,0.0,,Bruce Nourish,"""NP approaches, use of GPS on VTF, checklists.""",Bruce Nourish;Instructor;bruce.nourish@gmail.com;+12066730839,,,,,,,,,,,,,,,1,1,0,0,1
+2025-01-19,N996TA,KRNT,KRNT,0S9,,,,,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,82.80,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,Cheryl Geels;Passenger;cheryl@geels.org;(425) 533-3971,Dennis Geels;Passenger;geels@google.com;+1 (425) 698-0234,,,,,,,,,,,,,,2,2,0,0,2
+2025-01-18,N5254W,KRNT,KRNT,KPAE,,,,,,,1.2,1.2,0.0,1.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,50.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.2,0.0,0.0,0.0,Cody Hargreaves,"""BEFA night checkout and GFC500 checkout """,,,,,,,,,,,,,,,,0,0,3,3,3
+2025-01-09,N996TA,KRNT,KRNT,,,,,,,,0.5,0.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.5,0.0,0.5,0.0,Shad Pipkin,"""C172S checkout""",Shad Pipkin;Instructor;shadpipkin@yahoo.com;2063497853,,,,,,"""C172S Checkout""",,,,,,,,,3,1,0,0,3
+2025-01-09,N996TA,KRNT,KRNT,0S9,,,,,,,2.1,2.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,82.80,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,"""Spruce goose with Ian""",,,,,,,,,2,2,0,0,2
+2025-01-04,N78440,KRNT,KRNT,,,,,,,,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.0,0.0,0.0,,ADAM TOMLINSON,,Adam Tomlinson;Instructor;nosnilmotmada@gmail.com;+1 (253) 249-9298,,,,,,,,,,,,,,,7,1,0,0,7
+2024-12-31,N436SA,S50,S50,KPLU,22:45,22:50,23:46,00:01,,,1.1,1.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.4,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,,,0.0,1.1,0.0,0.0,,Bruce Nourish,"""Initial instrument student assessment """,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-12-24,N436SA,S50,KTIW,,20:14,20:14,20:58,20:58,,,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,14.40,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,7,1,0,0,7
+2024-11-30,N436SA,S50,S50,KPLU,,,,,,,0.8,0.8,0.0,0.0,0.8,0.0,0.0,0.0,0.0,0.0,0.0,0,27.30,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,2,2,0,0,2
+2024-11-30,N436SA,KPLU,KPLU,TIW TCM,,,,,,,1.2,1.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,30.90,0.0,1.1,0.00,0.00,0.00,0.00,1,1;ILS OR LOC RWY 17;17;KTIW;;,1;RNAV (GPS) RWY 35;35;KPLU;;CIRCLE,1;ILS OR LOC RWY 16;16;KTCM;;,,,,0.0,1.2,0.0,1.5,,,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,"""61.65(b)1-10 ground """,,,,,,,,,1,1,0,0,1
+2024-11-22,,,,,,,,,,,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,2.0,,,,,,,,,,"""61.65(b)1-10 ground""",,,,,,,,,0,0,0,0,0
+2024-11-15,N436SA,S50,S50,TIW OLM,,,,,,,1.5,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,71.90,1.0,0.0,0.00,0.00,0.00,0.00,0,1;RNAV (GPS) RWY 17;17;KOLM;;,1;ILS OR LOC RWY 17;17;KTIW;;,1;RNAV (GPS) RWY 35;35;S50;;,,,,0.0,1.5,0.0,0.0,,John Frischkorn,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-10-29,N436SA,S50,S50,KPLU,,,,,,,1.3,1.3,0.0,0.5,1.3,0.0,0.0,0.0,0.0,0.0,0.0,0,27.30,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,1,1,2
+2024-10-29,N436SA,KPLU,KPLU,OLM,,,,,,,1.7,1.7,0.0,1.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,52.90,0.0,1.6,0.00,0.00,0.00,0.00,1,1;VOR-A;17;KOLM;;,1;ILS OR LOC RWY 17;17;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,0.0,1.7,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,0,0,1,1,1
+2024-10-22,N436SA,S50,S50,KPLU,,,,,,,0.7,0.7,0.0,0.4,0.7,0.0,0.0,0.0,0.0,0.0,0.0,0,27.30,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,1,1,2
+2024-10-22,N436SA,KPLU,KPLU,KOLM,,,,,,,1.8,1.8,0.0,1.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,53.00,0.0,1.7,0.00,0.00,0.00,0.00,0,1;VOR-A;17;KOLM;;,1;ILS OR LOC RWY 17;17;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,0.0,1.8,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,0,0,1,1,1
+2024-10-12,N436SA,S50,S50,KPLU,,,,,,,1.2,1.2,0.0,0.0,1.2,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-10-12,N436SA,KPLU,KPLU,KOLM,,,,,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.5,0.00,0.00,0.00,0.00,0,1;VOR-A;17;KOLM;;,1;ILS OR LOC RWY 17;17;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,0.0,1.6,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,1,0,0,1
+2024-10-06,N248JW,KPAE,KPAE,CARRO KHQM WAVLU V27 PULYI KAST V187 OLM V287 ARPEE   KPAE ,,,,,,,3.4,3.4,0.0,0.0,0.0,3.4,0.0,0.0,0.0,0.0,0.0,0,280.50,0.0,2.5,0.00,0.00,0.00,0.00,0,1;RNAV (GPS) RWY 08;08;KAST;LP;,1;ILS OR LOC RWY 24;24;KHQM;;,1;RNAV (GPS) Y RWY 16R;16R;KPAE;LNAV;,,,,0.0,3.4,0.0,0.0,,Andrea Bracewell,"""RFS 182 checkout, 61.65(d)(2)(ii) cross country """,Andrea Bracewell;Instructor;andrea@bracewellfamily.net;+14255300161,,,,,,"""Instrument XC""",,,,,,,,,2,2,0,0,2
+2024-09-27,N436SA,S50,S50,KPLU,,,,,,,0.9,0.9,0.0,0.4,0.9,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,1,1,2
+2024-09-27,N436SA,KPLU,KPLU,,,,,,,,2.6,2.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,2.5,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 35;35;KTIW;;,1;RNAV (GPS) RWY 02;02;KPWT;;,1;VOR RWY 35;35;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,,,0.0,2.6,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,1,0,0,1
+2024-09-24,N248JW,KPAE,KPAE,,,,,,,,1.2,1.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.2,0.0,0.0,,Andrea Bracewell,"""RFS 182 Checkout.""",Andrea Bracewell;Instructor;andrea@bracewellfamily.net;+14255300161,,,,,,,,,,,,,,,1,1,0,0,1
+2024-09-22,N436SA,S50,S50,0S9 KCLM,,,,,,,3.0,3.0,0.0,0.0,0.0,3.0,0.0,0.0,0.0,0.0,0.0,0,147.80,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,3,3,0,0,3
+2024-09-16,N436SA,S50,S50,PLU,,,,,,,0.8,0.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,2,2,0,0,2
+2024-09-16,N436SA,KPLU,KPLU,PWT OLM,,,,,,,1.9,1.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.8,0.00,0.00,0.00,0.00,0,1;VOR-A;;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,1;ILS OR LOC RWY 20;20;KPWT;;,,,,0.0,1.9,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,1,0,0,1
+2024-09-15,N436SA,S50,S50,KPLU,,,,,,,0.8,0.8,0.0,0.4,0.8,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,1,1,2
+2024-09-15,N436SA,KPLU,KPLU,,,,,,,,2.2,2.2,0.0,2.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,2.1,0.00,0.00,0.00,0.00,2,2;RNAV (GPS) RWY 17;17;KOLM;;,1;RNAV (GPS) RWY 35;35;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,0.0,2.2,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,0,0,1,1,1
+2024-09-12,N436SA,KPLU,KPLU,PWT TIW OLM,,,,,,,2.1,2.1,0.0,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,2.0,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 17;17;KTIW;;,1;RNAV (GPS) RWY 17;17;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,1;ILS OR LOC RWY 20;20;KPWT;;,,,0.0,2.1,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,0,0,1,1
+2024-09-12,N436SA,S50,S50,PLU,,,,,,,0.8,0.8,0.0,0.2,0.8,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,1,1,2
+2024-09-04,N7369S,KTIW,KTIW,KPWT,,,,,,,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,3
+2024-09-04,N436SA,KTIW,KPLU,,,,,,,,0.6,0.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-09-04,N436SA,KPLU,S50,,,,,,,,0.3,0.3,0.0,0.2,0.3,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,0,0,1,1,1
+2024-09-04,N436SA,KPLU,KPLU,OLM,,,,,,,1.8,1.8,0.0,0.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.7,0.00,0.00,0.00,0.00,2,3;ILS OR LOC RWY 17;17;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,,0.0,1.8,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,1,0,0,1
+2024-08-29,N436SA,S50,S50,,,,,,,,0.9,0.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,2,2,0,0,2
+2024-08-29,N436SA,KPLU,KPLU,OLM,,,,,,,1.9,1.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.8,0.00,0.00,0.00,0.00,0,2;VOR RWY 35;35;KOLM;;,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,,0.0,1.9,0.0,0.0,,Zack Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,1,0,0,1
+2024-08-09,N436SA,S50,0S9,,17:51,17:51,19:09,19:24,,,1.6,1.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,50.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-08-06,N436SA,KPLU,KPLU,OLM,,,,,,,2.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.8,8.50,0.50,0.00,0.00,1,1;RNAV (GPS) RWY 35;35;KPLU;;CIRCLE,1;RNAV (GPS) RWY 35;35;KOLM;;CIRCLE,1;ILS OR LOC RWY 17;17;KOLM;;,,,,0.0,2.0,0.0,0.0,,Zack Williams,"""Good job! :)""",,,,,,,,,,,,,,,,2,2,0,0,2
+2024-08-06,N436SA,S50,S50,KPLU,00:30,00:38,00:57,01:12,,,0.7,0.7,0.0,0.3,0.7,0.0,0.0,0.0,0.0,0.0,0.0,0,27.20,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,1,1,2
+2024-08-01,N436SA,KPLU,KPLU,,,,,,,,1.5,1.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.4,0.00,0.00,0.00,0.00,1,2;RNAV (GPS) RWY 35;35;KPLU;;,1;ILS OR LOC RWY 17;17;KOLM;;,,,,,0.0,1.5,0.0,0.0,,Zackery Williams,"""Good job!""",Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,1,0,0,1
+2024-08-01,N436SA,S50,KPLU,,,,,,,,0.7,0.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-08-01,N436SA,KPLU,S50,,03:43,03:47,04:00,04:15,,,0.6,0.6,0.0,0.1,0.6,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,0,0,1,1
+2024-07-26,N436SA,KPLU,KPLU,,,,,,,,1.2,1.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.0,0.00,0.00,0.00,0.00,2,2;RNAV (GPS) RWY 35;35;KPLU;;,,,,,,0.0,1.2,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,,,,,,,,,,1,1,0,0,1
+2024-07-26,N436SA,KPLU,S50,,16:39,17:09,17:23,17:38,,,0.4,0.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-07-26,N436SA,S50,KPLU,,14:47,14:51,15:05,15:20,,,0.5,0.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-07-12,N783B,S50,S50,,,,,,,,1.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,1.1,0.0,0.0,,,,Amir Manouchehrian;Instructor;Westsideair1@gmail.com;,,,,,,,,,,,,,,,1,1,0,0,1
+2024-07-12,N436SA,KPLU,S50,,00:33,00:38,00:51,01:06,,,0.4,0.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-07-12,N436SA,KPLU,KPLU,,22:11,22:31,23:45,00:00,,,1.3,1.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,1.1,0.00,0.00,0.00,0.00,1,1;RNAV (GPS) RWY 35;35;KPLU;;,,,,,,0.0,1.3,0.0,0.0,,Zackery Williams,,Zack Williams;Instructor;zakwpilot@gmail.com;+12533635690,,,,,,"""First lesson with Zack Williams""",,,,,,,,,1,1,0,0,1
+2024-07-12,N436SA,S50,KPLU,,21:32,21:37,21:51,22:06,,,0.5,0.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,,,,,,,,,,1,1,0,0,1
+2024-06-29,N436SA,S50,S50,,,,,,,,0.8,0.8,,,,,,,,,,,,,0.7,,,,,,1;RNAV (GPS);35;S50;Simulated;,,,,,,,0.8,,,,Chad Ellison,"""GPS 35 S50.
+
+Basic IFR flying hdg and altitude changes.""",Chad Ellison;Instructor;Ellison.35@gmail.com;+1 (614) 560-5397,,,,,,"""Chad Ellison intro flt""",,,,,,,,,1,1,,,1
+2024-06-29,N436SA,S50,S50,,,,,,,,0.5,0.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Pattern work""",,,,,,,,,4,1,,,4
+2024-06-19,N436SA,0S9,S50,,,,,,,,1.0,1.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2024-06-09,N436SA,KCOE,68S,,,,,,,,1.1,1.1,,,,1.1,,,,,,,55.40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2024-06-08,N436SA,68S,S50,"2S8, 80T",,,,,,,1.2,1.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Safety pilot for Ian""",,,,,,,,,,,,,0
+2024-06-08,N436SA,EPH,COE,"GEG, SFF",,,,,,,0.9,0.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Safety pilot for Ian""",,,,,,,,,,,,,0
+2024-06-08,N436SA,S50,EPH,,,,,,,,1.5,1.5,,,,1.5,,,,,,,,,1.3,,,,,,1;RNAV (GPS);03;KEPH;Simulated;,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2024-05-31,N436SA,S16,KHQM,,,,,,,,0.5,0.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,,,2
+2024-05-31,N436SA,S43,S16,,,,,,,,2.0,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Safety pilot for Ian""",,,,,,,,,,,,,0
+2024-05-27,N436SA,PWT,S43,,,,,,,,1.0,1.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Safety pilot for Ian""",,,,,,,,,,,,,0
+2024-05-27,N436SA,SHN,TIW,,,,,,,,1.1,1.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Safety pilot for Ian""",,,,,,,,,,,,,0
+2024-05-27,N436SA,S43,SHN,PWT,,,,,,,1.4,1.4,,,,1.4,,,,,,,,,0.9,,,,,,1;ILS;20;KPWT;Simulated;,1;RNAV (GPS);02;KPWT;Simulated;,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,,,2
+2024-05-27,N436SA,TIW,PWT,SHN,,,,,,,1.5,1.5,,,,,,,,,,,,,1.2,,,,,,2;RNAV (GPS);23;KSHN;Simulated;,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,,,2
+2024-05-20,N436SA,TMK,S43,,,,,,,,2.3,2.3,,,,,,,,,,,,,,,,,,,1;RNAV (GPS);23;KSHN;Simulated;,,,,,,,,,,,,,,,,,,,"""Safety pilot for Ian""",,,,,,,,,,,,,0
+2024-05-20,N436SA,S43,TMK,,,,,,,,2.6,2.6,,,,2.6,,,,,,,,,2.1,,,,,,1;RNAV (GPS);13;KTMK;Simulated;,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2024-05-17,N436SA,S43,AWO,,,,,,,,1.1,1.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4,1,,,4
+2024-05-09,N436SA,S43,S43,KBLI,,,,,,,2.6,2.6,,,,2.6,,,,,,,,,2.1,,,,,,1;RNAV (GPS);34;KBLI;Simulated;,,,,,,,2.6,,,,,,Ruben Velasco;Instructor;;,,,,,,"""InstructorComments: VOR tracking""",,,,,,,,,2,1,,,2
+2024-05-08,N436SA,S43,S43,KCLM,,,,,,,3.2,3.2,,,,3.2,,,,,,,,0.2,2.9,,,,,,1;RNAV (GPS);27;KCLM;Simulated;,,,,,,,3.2,,,,,,Ruben Velasco;Instructor;;,,,,,,"""InstructorComments: 61.65(c) 1-6,8""",,,,,,,,,2,2,,,2
+2024-05-07,N436SA,S43,S43,"TIW, 0S9",,,,,,,3.9,3.9,,,,,,,,,,,,,0.5,,,,,,1;ILS;17;KTIW;Simulated;,1;RNAV (GPS);09;0S9;Simulated;,,,,,,3.9,,,,,,Ruben Velasco;Instructor;;,,,,,,"""InstructorComments: 61.65(c) 1-6,8""",,,,,,,,,6,1,,,6
+2024-05-04,N436SA,S43,S43,PAE,,,,,,,0.9,0.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,2,,,2
+2024-04-20,N436SA,S43,S43,S50,,,,,,,1.5,1.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,2,,,2
+2024-04-09,N436SA,S43,S43,"BVS, S50",,,,,,,2.3,2.3,,0.9,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,,,1,2
+2024-04-08,N436SA,S43,S43,RNT,,,,,,,1.1,1.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,,,2
+2024-03-26,N436SA,S50,S50,,,,,,,,1.4,1.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Night currency""",,,,,,,,,10,,3,3,13
+2024-03-15,N783B,S50,S50,,,,,,,,1.4,,,,,,,,,,,,,,,,,,,,,,,,,,,1.4,,,,Amir Manouchehrian,"""Multi eng intro,slow flight, steep turns, power-off stall, single eng demo, pattern, landing""",Amir Manouchehrian;Instructor;Westsideair1@gmail.com;,,,,,,"""First multi-engine flight InstructorComments: Multi-eng intro, slow flt, stp turns, power-off stall, single-eng demo, traffic pttrn, landing""",,,,,,,,,1,1,,,1
+2024-02-19,N436SA,S50,S50,"AWO, W39, PAE",,,,,,,2.2,2.2,,,,2.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5,2,,,5
+2024-02-17,N436SA,S50,S50,KPAE,,,,,,,1.8,1.8,,0.3,1.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,1,2
+2024-02-16,N436SA,S50,S50,"AWO, W10, PAE, BFI",,,,,,,2.2,2.2,,,,2.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5,2,,,5
+2024-02-10,N436SA,S50,S50,"TDO, PLU",,,,,,,1.9,1.9,,,,1.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,3,2,,,3
+2024-01-28,N436SA,S50,S50,"RNT, S36",,,,,,,1.3,1.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,7,2,,,7
+2023-12-31,N436SA,S50,S50,,,,,,,,1.2,1.2,,,,,,,,,,,,,0.5,,,,,,1;RNAV (GPS);S50;sim w/safety pilot: Ian McDaniel;NO;,,,,,,,,,,,,,,,,,,,"""Also safety pilot for Ian""",,,,,,,,,1,1,,,1
+2023-12-29,N436SA,S50,S50,,,,,,,,1.2,1.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Safety pilot for Ian""",,,,,,,,,,,,,0
+2023-12-26,N436SA,PWT,S50,,,,,,,,1.3,1.3,,,,,,,,,,,,,0.2,,,,,,1;ILS;20;KPWT;sim w/safety pilot: Ian McDaniel;,,,,,,,,,,,,,,,,,,,"""First simulated approach. Also safety pilot for Ian.""",,,,,,,,,2,1,,,3
+2023-12-26,N436SA,S50,W16,,,,,,,,0.6,0.6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2023-12-23,N436SA,S50,AWO,,,,,,,,1.3,1.3,,,,1.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2023-12-16,N436SA,KOLM,KOLM,,,,,,,,0.2,0.2,0.0,0.2,0.2,0.0,0.0,0.0,0.0,0.0,0.0,0,0.00,0.0,0.0,0.00,0.00,0.00,0.00,0,,,,,,,0.0,0.0,0.0,0.0,,,,,,,,,,"""Night currency at OLM after dinner before flying back to S50""",,,,,,,,,0,0,3,3,3
+2023-12-16,N436SA,KOLM,S50,,,,,,,,0.9,0.9,,0.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1
+2023-12-16,N436SA,S50,2S9,HQM,,,,,,,1.6,1.6,,,,1.6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,,,2
+2023-11-12,N436SA,S50,S50,"W28, 0S9",,,,,,,2.5,2.5,,,,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,3,2,,,3
+2023-10-28,N436SA,S50,S50,KCLM,,,,,,,2.9,2.9,,1.3,,2.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,3,2,,,3
+2023-10-27,N436SA,S50,S50,"S36, 51WA, 02WA, PLU, OLM, SHN, TIW",,,,,,,2.6,2.6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,9,3,,,9
+2023-09-30,N436SA,S50,S50,KORS,,,,,,,3.4,3.4,,0.5,,3.4,,,,,,,174.70,,,,,,,,,,,,,,,,,,,,,,,,,,,"""San Juans with Nick Brosnahan""",,,,,,,,,3,3,,,3
+2023-09-22,N436SA,S50,S50,"0S9, W28",,,,,,,2.1,2.1,,,,2.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Lunch with Dennis""",,,,,,,,,3,2,,,3
+2023-09-08,N436SA,S50,4S2,,,,,,,,2.0,2.0,,,,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,2,,,2
+2023-09-02,N436SA,S50,0S9,,,,,,,,2.0,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,,,2
+2023-08-13,N436SA,S50,0S9,,,,,,,,1.1,1.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2023-08-12,N436SA,TDO,S50,OLM,,,,,,,1.3,1.3,,1.3,,1.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,2
+2023-08-12,N436SA,4S2,TMK,,,,,,,,1.4,1.4,,,,1.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2023-08-11,N436SA,S50,S50,,,,,,,,0.7,0.7,,0.7,0.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Night currency""",,,,,,,,,,,3,3,3
+2023-07-12,N436SA,KPAE,KPAE,KCLM W28,,,,,,,1.8,1.8,,,,1.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""Full stops CLM, W28""",,,,,,,,,3,3,,,3
+2023-07-11,N436SA,PAE,PAE,,,,,,,,1.1,1.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""PPL checkride""",,,TRUE,,,,,,3,2,,,3
+2023-07-11,N436SA,PAE,S50,,,,,,,,0.7,0.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2023-07-10,N436SA,S50,PAE,,,,,,,,0.7,0.7,,,0.7,0.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1,,,2
+2023-07-09,N436SA,S50,S50,PAE AWO,,,,,,,2.8,2.8,,,2.8,2.8,,,,,,,100.90,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10,1,,,10
+2023-07-08,N436SA,S50,S50,,,,,,,,1.8,1.8,,,1.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,7,2,,,7
+2023-06-28,N436SA,S50,S50,,,,,,,,1.9,,,,,,,,,,,,,,,,,,,,,,,,,,,1.9,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: checkride prep, stp turns, stalls, slow flt, emer proc, grass @ 51WA, short/soft flds""",,,,,,,,,6,1,,,6
+2023-06-23,N436SA,S50,S50,,,,,,,,1.4,,,,,,,,,,,,,,0.3,,,,,,,,,,,,,1.4,,,,,,3900183CFI;Instructor;;,,,,,,"""InstructorComments: checkride prep, stalls, stp turns, sim instrument, short/soft fld to/ldg, power off 180º, go around, ground ref man""",,,,,,,,,2,1,,,2
+2023-06-23,N436SA,S50,S50,,,,,,,,1.3,,,,,,,,,,,,,,0.7,,,,,,,,,,,,,1.3,,,,,,3900183CFI;Instructor;;,,,,,,"""InstructorComments: sim instrument, pwr on/off stalls""",,,,,,,,,2,1,,,2
+2023-06-19,N436SA,S50,S50,,,,,,,,0.7,0.7,,,0.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""x-wind ldgs""",,,,,,,,,5,1,,,5
+2023-06-14,N436SA,S50,S50,,,,,,,,0.7,0.7,,,0.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,8,1,,,8
+2023-06-01,N436SA,S50,PWT,,,,,,,,0.5,0.5,,,0.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,,,1
+2023-06-01,N436SA,PWT,S50,"TIW, S36, RNT",,,,,,,1.2,1.2,,,1.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4,2,,,4
+2023-06-01,N436SA,PWT,PWT,,,,,,,,1.8,,,,,,,,,,,,,,0.8,,,,,,,,,,,,,1.8,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: soft/short fld proc, stp turns, slow flt, stalls, emer proc, gnd ref man, instrument, unusual atts""",,,,,,,,,4,1,,,4
+2023-05-28,N436SA,S50,S50,S36,,,,,,,1.3,1.3,,,1.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""gnd ref man""",,,,,,,,,5,4,,,5
+2023-05-27,N436SA,S50,S50,,,,,,,,0.8,0.8,,,0.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,6,1,,,6
+2023-05-22,N436SA,S50,S50,"RNT, S36",,,,,,,1.3,1.3,,,1.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""x-wind ldgs""",,,,,,,,,,2,,,10
+2023-05-22,N436SA,S50,S50,,,,,,,,2.1,,,,,,,,,,,,,,0.5,,,,,,,,,,,,,2.1,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: checkride prep, stp turns, stalls, slow flt, gnd ref man, emer proc, s36 familiarization""",,,,,,,,,,3,,,8
+2023-05-20,N436SA,S50,S50,,,,,,,,1.8,1.8,,,1.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,,20
+2023-05-19,N436SA,S50,S50,,,,,,,,1.2,1.2,,,1.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,,7
+2023-05-16,N436SA,S50,S50,,,,,,,,1.1,1.1,,,1.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,,12
+2023-05-09,N436SA,S50,S50,"PWT, TIW",,,,,,,2.4,2.4,,,2.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,,,14
+2023-05-06,N436SA,S50,S50,TIW,,,,,,,1.6,1.6,,,1.6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,,11
+2023-04-28,N436SA,S50,S50,TDO,,,,,,,2.2,2.2,,,2.2,2.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""solo xc S50-TDO-S50""",,,,,,,,,,2,,,4
+2023-04-24,N436SA,S50,S50,"S50, KFHR, KAWO, S50",,,,,,,2.9,2.9,,,2.9,2.9,,,,,,,168.70,,,,,,,,,,,,,,,,,,,,,,,,,,,"""solo xc S50-FHR-AWO-S50""",,,,,,,,,,3,,,3
+2023-04-22,N436SA,TIW,TIW,,,,,,,,0.5,0.5,,,0.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,3,,,3
+2023-04-20,N436SA,KBLI,KOLM,KTIW,,,,,,,2.3,,,2.3,,2.3,,,,,,,145.30,,,,,,,,,,,,,,,2.3,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: night XC BLI-OLM-S50""",,,,,,,,,,,2,2,2
+2023-04-20,N436SA,S50,BLI,"RNT, S43, AWO, BVS, BLI",,,,,,,2.0,,,2.0,,2.0,,,,,,,,,,,,,,,,,,,,,,2.0,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: night landings RNT, S43, AWO, BVS, BLI, TIW""",,,,,,,,,,,10,10,10
+2023-04-06,N436SA,S50,S50,"TIW, PWT",,,,,,,1.8,,,,,,,,,,,,,,0.4,,,,,,,,,,,,,1.8,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: tiw + pwt familiarization, short/soft fld ldgs, emer proc, engine fail""",,,,,,,,,,1,,,9
+2023-03-29,N436SA,S50,S50,,,,,,,,2.3,2.3,,,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""pattern work""",,,,,,,,,,2,,,26
+2023-03-27,N436SA,S50,S50,,,,,,,,1.2,1.2,,,1.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""pattern work""",,,,,,,,,13,,,,13
+2023-03-25,N436SA,S50,S50,,,,,,,,1.2,1.2,,,1.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""slow flt""",,,,,,,,,5,3,,,5
+2023-03-23,N436SA,S50,S50,,,,,,,,1.4,1.4,,,1.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""slow flt, steep trns,""",,,,,,,,,6,2,,,6
+2023-03-20,N436SA,S50,S50,,,,,,,,2.4,,,,,2.4,,,,,,,,,0.3,,,,,,,,,,,,,2.4,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: xc planning, preflt wx brief w/fss,diversion proc, emerg proc, tower class b/c/d ops""",,,,,,,,,5,,,,5
+2023-03-19,N436SA,S50,S50,,,,,,,,1.5,1.5,,,1.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""pattern work""",,,,,,,,,14,3,,,14
+2023-03-17,N436SA,S50,S50,,,,,,,,1.6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: stp turns, slow flt, stalls, emerg proc, slips, normal ldgs, traffic pttrns""",,,,,,,,,8,,,,8
+2023-03-17,N436SA,S50,S50,,,,,,,,0.4,0.4,,,0.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""First solo""",,,,,,,,,3,3,,,3
+2023-01-20,N436SA,S50,S50,,,,,,,,1.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Nick Bartholet;Instructor;;,,,,,,"""InstructorComments: slow flt, pwr on/off stalls, ldgs""",,,,,,,,,3,,,,3
+2023-01-03,N436SA,S50,S50,,,,,,,,1.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Nick Bartholet;Instructor;;,,,,,,"""InstructorComments: slow flt, go around, normal to/ldg""",,,,,,,,,5,,,,5
+2023-01-02,N436SA,S50,S50,,,,,,,,1.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Nick Bartholet;Instructor;;,,,,,,"""InstructorComments: normal to/ldg""",,,,,,,,,7,,,,7
+2022-10-21,N436SA,S50,S50,,,,,,,,1.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: gnd ref man, trns arnd pt, sturns x rd, xwind lnd, gusty cnd, go around""",,,,,,,,,10,,,,10
+2022-10-17,N436SA,S50,S50,TIW,,,,,,,1.6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: stp turns, stalls, slow flt, twr comm @ tiw, traffic pttrn""",,,,,,,,,7,,,,7
+2022-10-14,N436SA,S50,S50,,,,,,,,1.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: stp turns, stalls, slow flt, emerg proc, engine fail, gnd ref man, traffic pttrn""",,,,,,,,,10,,,,10
+2022-10-10,N436SA,S50,S50,PWT,,,,,,,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,2.5,,,,,,John Frischkorn;Instructor;johnfrischkorn@comcast.net;,,,,,,"""InstructorComments: C150 intro, stp turns, stalls, airport ops, traffic pttrn @ pwt""",,,,,,,,,12,,,,12
