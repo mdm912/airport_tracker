@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
 import { useAirportStore } from '../store/useAirportStore';
-import { Upload, Plane, Search, Trash2, List, Share2, Settings, Map as MapIcon } from 'lucide-react';
+import { Upload, Plane, Search, Trash2, List, Share2, Check, Settings, Map as MapIcon } from 'lucide-react';
 import type { AirportType } from '../types';
 import { Auth } from './Auth';
 
@@ -10,6 +10,7 @@ const AirportControls: React.FC = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [mode, setMode] = useState<'upload' | 'manual' | 'manage' | 'settings'>('upload');
     const [statusMessage, setStatusMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
+    const [isCopied, setIsCopied] = useState(false);
 
     React.useEffect(() => {
         if (statusMessage) {
@@ -22,7 +23,9 @@ const AirportControls: React.FC = () => {
         if (!user) return;
         const url = `${window.location.origin}${window.location.pathname}?share=${user.id}`;
         navigator.clipboard.writeText(url);
-        setStatusMessage({ text: 'Share link copied to clipboard!', type: 'success' });
+        setIsCopied(true);
+        setStatusMessage({ text: 'Share link copied!', type: 'success' });
+        setTimeout(() => setIsCopied(false), 2000);
     };
 
     const [candidates, setCandidates] = useState<any[]>([]);
@@ -151,10 +154,11 @@ const AirportControls: React.FC = () => {
                     {user && (
                         <button
                             onClick={handleShare}
-                            className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
-                            title="Share Map"
+                            className={`p-1.5 rounded-full transition-all flex items-center gap-1 ${isCopied ? 'bg-green-50 text-green-600' : 'text-blue-600 hover:bg-blue-50'}`}
+                            title={isCopied ? 'Copied!' : 'Share Map'}
                         >
-                            <Share2 className="h-4 w-4" />
+                            {isCopied ? <Check className="h-4 w-4" /> : <Share2 className="h-4 w-4" />}
+                            {isCopied && <span className="text-[10px] font-bold pr-1">Copied!</span>}
                         </button>
                     )}
                     <button onClick={() => setIsOpen(!isOpen)} className="text-sm text-gray-500 hover:text-black">

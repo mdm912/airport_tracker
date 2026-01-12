@@ -26,6 +26,9 @@ interface AirportState {
     loadUserAirports: (userId: string) => Promise<void>;
     focusAirportId: string | null;
     setFocusAirportId: (id: string | null) => void;
+    isSharedView: boolean;
+    setSharedView: (isShared: boolean) => void;
+    setAirports: (airports: Airport[]) => void;
 }
 
 // Helper to fetch and normalize DB
@@ -64,6 +67,9 @@ export const useAirportStore = create<AirportState>()(
             isLoading: false,
             focusAirportId: null,
             setFocusAirportId: (id) => set({ focusAirportId: id }),
+            isSharedView: false,
+            setSharedView: (isShared) => set({ isSharedView: isShared }),
+            setAirports: (airports) => set({ airports }),
             mapLayer: 'sectional',
             setMapLayer: (layer) => set({ mapLayer: layer }),
             setUser: async (user) => {
@@ -116,6 +122,7 @@ export const useAirportStore = create<AirportState>()(
             },
             syncAirports: async () => {
                 const { user } = get();
+                set({ isSharedView: false });
                 if (!user) return;
 
                 set({ isLoading: true });
@@ -356,7 +363,7 @@ export const useAirportStore = create<AirportState>()(
                 }
             },
             loadUserAirports: async (userId) => {
-                set({ isLoading: true });
+                set({ isLoading: true, isSharedView: true });
                 const { data, error } = await supabase
                     .from('airports')
                     .select('*')
