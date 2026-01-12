@@ -64,7 +64,7 @@ const MapComponent: React.FC = () => {
                     <TileLayer
                         attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
                         url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
-                        maxZoom={14}
+                        maxZoom={20}
                         maxNativeZoom={12}
                         opacity={1}
                     />
