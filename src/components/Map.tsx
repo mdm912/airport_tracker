@@ -66,8 +66,9 @@ const MapComponent: React.FC = () => {
                         url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
                         minZoom={0}
                         maxZoom={20}
-                        maxNativeZoom={12}
+                        maxNativeZoom={10}
                         opacity={1}
+                        zIndex={100}
                     />
                 )}
                 {airports.map((airport) => (
