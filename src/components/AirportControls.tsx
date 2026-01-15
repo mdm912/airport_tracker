@@ -77,21 +77,16 @@ const AirportControls: React.FC = () => {
                     route: row[routeIndex]
                 })).filter(entry => entry.date && entry.from && entry.to);
 
-                console.log(`[V1.3] Parsed ${entries.length} valid flight entries.`);
+                console.log(`[V1.4] Parsed ${entries.length} valid flight entries.`);
 
                 importFlightLog(entries).then((foundAirports) => {
-                    console.log(`[V1.3] Store returned ${foundAirports.length} new airports.`);
+                    console.log(`[V1.4] Store returned ${foundAirports.length} new airports.`);
                     if (foundAirports.length === 0) {
                         alert('Log processed. No new airports found to add.');
                         return;
                     }
                     setImportPreview(foundAirports);
-                    // Default check only 'from' and 'to' airports, leave 'route' unchecked
-                    setSelectedImportIds(new Set(
-                        foundAirports
-                            .filter(a => a.source !== 'route')
-                            .map(a => a.id)
-                    ));
+                    setSelectedImportIds(new Set(foundAirports.map(a => a.id)));
                 }).catch(e => {
                     console.error('Import error:', e);
                     alert("Import failed unexpectedly.");
@@ -252,8 +247,8 @@ const AirportControls: React.FC = () => {
                                             <X className="h-4 w-4" />
                                         </button>
                                     </div>
-                                    <p className="text-xs text-gray-500">
-                                        We found {importPreview.length} new airports. Uncheck any that weren't actual stops.
+                                    <p className="text-xs text-gray-400 mt-1">
+                                        From your log: {importPreview.length} items found.
                                     </p>
                                     <div className="flex items-center gap-2 mb-2">
                                         <button
