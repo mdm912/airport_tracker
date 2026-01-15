@@ -8,6 +8,10 @@ function App() {
   const { user, loadUserAirports, syncAirports, isSharedView, setSharedView, setAirports } = useAirportStore();
 
   useEffect(() => {
+    console.log('[V1.11] Airport Tracker initialized.');
+  }, []);
+
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const sharedUserId = params.get('share');
 
