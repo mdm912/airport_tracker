@@ -112,11 +112,24 @@ const MapComponent: React.FC = () => {
                         getTileUrl={function (coords: any) {
                             // Map zoom levels: 10->9, 12->11, 8->9
                             let adjustedZoom = coords.z;
-                            if (coords.z === 10) adjustedZoom = 9;
-                            else if (coords.z === 12) adjustedZoom = 11;
-                            else if (coords.z === 8) adjustedZoom = 9;
+                            let x = coords.x;
+                            let y = coords.y;
 
-                            return `https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/${adjustedZoom}/${coords.y}/${coords.x}`;
+                            if (coords.z === 10) {
+                                adjustedZoom = 9;
+                                x = Math.floor(coords.x / 2);
+                                y = Math.floor(coords.y / 2);
+                            } else if (coords.z === 12) {
+                                adjustedZoom = 11;
+                                x = Math.floor(coords.x / 2);
+                                y = Math.floor(coords.y / 2);
+                            } else if (coords.z === 8) {
+                                adjustedZoom = 9;
+                                x = Math.floor(coords.x * 2);
+                                y = Math.floor(coords.y * 2);
+                            }
+
+                            return `https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/${adjustedZoom}/${y}/${x}`;
                         }}
                     />
                 )}
