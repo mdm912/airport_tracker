@@ -80,6 +80,7 @@ const AirportControls: React.FC = () => {
                 console.log(`Parsed ${entries.length} valid flight entries.`);
 
                 importFlightLog(entries).then((foundAirports) => {
+                    console.log(`Store returned ${foundAirports.length} new airports.`);
                     if (foundAirports.length === 0) {
                         alert('Log processed. No new airports found to add.');
                         return;
@@ -87,7 +88,7 @@ const AirportControls: React.FC = () => {
                     setImportPreview(foundAirports);
                     setSelectedImportIds(new Set(foundAirports.map(a => a.id)));
                 }).catch(e => {
-                    console.error(e);
+                    console.error('Import error:', e);
                     alert("Import failed unexpectedly.");
                 });
             }
