@@ -258,7 +258,13 @@ export const useAirportStore = create<AirportState>()(
                         return { status: 'not_found', message: `No exact code or name matches for "${input}".` };
                     }
 
-                    const code = entry.ident;
+                    // Prefer the entered code if it matches IATA or Local code
+                    let code = entry.ident;
+                    const cleanInput = input.trim().toUpperCase();
+                    if (entry.iata_code === cleanInput || entry.local_code === cleanInput) {
+                        code = cleanInput;
+                    }
+
                     const existing = get().airports.find(a => a.code === code && a.type === type);
 
                     if (existing) {
@@ -332,9 +338,17 @@ export const useAirportStore = create<AirportState>()(
                             if (data) {
                                 if (seenCodesInOperation.has(data.ident) || existingCodes.has(data.ident)) return;
 
+                                // Prefer the log code if it matches IATA or Local code
+                                let finalCode = data.ident;
+                                if (data.iata_code === code || data.local_code === code) {
+                                    finalCode = code;
+                                }
+
+                                if (existingCodes.has(finalCode) || seenCodesInOperation.has(finalCode)) return;
+
                                 newAirports.push({
                                     id: crypto.randomUUID(),
-                                    code: data.ident,
+                                    code: finalCode,
                                     name: data.name,
                                     lat: parseFloat(data.latitude_deg),
                                     lng: parseFloat(data.longitude_deg),
@@ -345,6 +359,7 @@ export const useAirportStore = create<AirportState>()(
                                 });
                                 seenCodesInOperation.add(code);
                                 seenCodesInOperation.add(data.ident);
+                                seenCodesInOperation.add(finalCode);
                             }
                         };
                         processCode(entry.from, 'from');
