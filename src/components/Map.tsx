@@ -62,23 +62,24 @@ const MapComponent: React.FC = () => {
 
     return (
         <div className="h-full w-full relative z-0">
-            <MapContainer center={[47.5, -122.2]} zoom={10} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full">
+            <MapContainer center={[47.5, -122.2]} zoom={8} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full">
                 <FocusHandler markerRefs={markerRefs} />
-                {/* Base Layer (Always visible) */}
+                {/* Base Layer (OSM fallback) */}
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     detectRetina={true}
                 />
 
-                {/* VFR Overlay */}
+                {/* VFR Overlay - only show when sectional mode is active AND at appropriate zoom levels */}
                 {mapLayer === 'sectional' && (
                     <TileLayer
                         attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
                         url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
-                        minZoom={0}
-                        maxZoom={20}
-                        maxNativeZoom={14}
+                        minZoom={8}
+                        maxZoom={12}
+                        minNativeZoom={8}
+                        maxNativeZoom={11}
                         detectRetina={true}
                         opacity={1}
                         zIndex={100}
