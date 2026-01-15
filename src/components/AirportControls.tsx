@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
 import { useAirportStore } from '../store/useAirportStore';
-import { Upload, Plane, Search, Trash2, List, Share2, Check, Settings, Map as MapIcon } from 'lucide-react';
-import type { AirportType } from '../types';
+import { Upload, Plane, Search, Trash2, List, Share2, Check, Settings, Map as MapIcon, X, CheckSquare, Square } from 'lucide-react';
+import type { Airport, AirportType } from '../types';
 import { Auth } from './Auth';
 
 const AirportControls: React.FC = () => {
-    const { airports, user, importFlightLog, addManualAirport, addAirport, removeAirport, clearAirports, mapLayer, setMapLayer } = useAirportStore();
+    const { airports, user, importFlightLog, addAirports, addManualAirport, addAirport, removeAirport, clearAirports, mapLayer, setMapLayer } = useAirportStore();
     const [isOpen, setIsOpen] = useState(true);
     const [mode, setMode] = useState<'upload' | 'manual' | 'manage' | 'settings'>('upload');
     const [statusMessage, setStatusMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
     const [isCopied, setIsCopied] = useState(false);
+
+    // Import Preview State
+    const [importPreview, setImportPreview] = useState<Airport[] | null>(null);
+    const [selectedImportIds, setSelectedImportIds] = useState<Set<string>>(new Set());
 
     React.useEffect(() => {
         if (statusMessage) {
@@ -75,12 +79,47 @@ const AirportControls: React.FC = () => {
 
                 console.log(`Parsed ${entries.length} valid flight entries.`);
 
-                importFlightLog(entries).catch(e => {
+                importFlightLog(entries).then((foundAirports) => {
+                    if (foundAirports.length === 0) {
+                        alert('Log processed. No new airports found to add.');
+                        return;
+                    }
+                    setImportPreview(foundAirports);
+                    setSelectedImportIds(new Set(foundAirports.map(a => a.id)));
+                }).catch(e => {
                     console.error(e);
                     alert("Import failed unexpectedly.");
                 });
             }
         });
+    };
+
+    const handleConfirmImport = async () => {
+        if (!importPreview) return;
+        const toAdd = importPreview.filter(a => selectedImportIds.has(a.id));
+        if (toAdd.length > 0) {
+            await addAirports(toAdd);
+            setStatusMessage({ text: `Successfully added ${toAdd.length} new airports!`, type: 'success' });
+        }
+        setImportPreview(null);
+        setSelectedImportIds(new Set());
+        setMode('manage');
+    };
+
+    const toggleImportSelection = (id: string) => {
+        const next = new Set(selectedImportIds);
+        if (next.has(id)) next.delete(id);
+        else next.add(id);
+        setSelectedImportIds(next);
+    };
+
+    const toggleAllImports = () => {
+        if (!importPreview) return;
+        if (selectedImportIds.size === importPreview.length) {
+            setSelectedImportIds(new Set());
+        } else {
+            setSelectedImportIds(new Set(importPreview.map(a => a.id)));
+        }
     };
 
     const handleManualSubmit = async (e: React.FormEvent) => {
@@ -199,19 +238,72 @@ const AirportControls: React.FC = () => {
 
                     {mode === 'upload' ? (
                         <>
-                            <div className="border border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative">
-                                <Upload className="h-8 w-8 text-gray-400 mb-2" />
-                                <span className="text-sm text-gray-600">Upload ForeFlight CSV</span>
-                                <input
-                                    type="file"
-                                    accept=".csv"
-                                    onChange={handleFileUpload}
-                                    className="absolute inset-0 opacity-0 cursor-pointer"
-                                />
-                            </div>
-                            <div className="text-xs text-gray-400">
-                                <p>Supporting ForeFlight exports.</p>
-                            </div>
+                            {importPreview ? (
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-center">
+                                        <h3 className="text-sm font-bold text-gray-700">Preview Import</h3>
+                                        <button onClick={() => setImportPreview(null)} className="text-gray-400 hover:text-black">
+                                            <X className="h-4 w-4" />
+                                        </button>
+                                    </div>
+                                    <p className="text-xs text-gray-500">
+                                        We found {importPreview.length} new airports. Uncheck any that weren't actual stops.
+                                    </p>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <button
+                                            onClick={toggleAllImports}
+                                            className="text-[10px] flex items-center gap-1 text-blue-600 font-bold hover:underline"
+                                        >
+                                            {selectedImportIds.size === importPreview.length ? <CheckSquare className="h-3 w-3" /> : <Square className="h-3 w-3" />}
+                                            {selectedImportIds.size === importPreview.length ? 'Deselect All' : 'Select All'}
+                                        </button>
+                                    </div>
+                                    <div className="max-h-60 overflow-y-auto space-y-2 border rounded-md p-2 bg-gray-50 custom-scrollbar">
+                                        {importPreview.map((ap) => (
+                                            <div
+                                                key={ap.id}
+                                                className="flex items-center gap-3 p-2 bg-white rounded border border-gray-100 cursor-pointer hover:bg-blue-50 transition-colors"
+                                                onClick={() => toggleImportSelection(ap.id)}
+                                            >
+                                                {selectedImportIds.has(ap.id) ? (
+                                                    <CheckSquare className="h-4 w-4 text-blue-600" />
+                                                ) : (
+                                                    <Square className="h-4 w-4 text-gray-300" />
+                                                )}
+                                                <div className="min-w-0 flex-1">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="font-bold text-xs">{ap.code}</span>
+                                                        <span className="text-[10px] text-gray-400 truncate">{ap.name}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <button
+                                        onClick={handleConfirmImport}
+                                        disabled={selectedImportIds.size === 0}
+                                        className={`w-full py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white transition-all ${selectedImportIds.size === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 active:scale-95'}`}
+                                    >
+                                        Import {selectedImportIds.size} Airports
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="border border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative">
+                                        <Upload className="h-8 w-8 text-gray-400 mb-2" />
+                                        <span className="text-sm text-gray-600">Upload ForeFlight CSV</span>
+                                        <input
+                                            type="file"
+                                            accept=".csv"
+                                            onChange={handleFileUpload}
+                                            className="absolute inset-0 opacity-0 cursor-pointer"
+                                        />
+                                    </div>
+                                    <div className="text-xs text-gray-400">
+                                        <p>Supporting ForeFlight exports.</p>
+                                    </div>
+                                </>
+                            )}
                         </>
                     ) : mode === 'manual' ? (
                         <div className="space-y-3">

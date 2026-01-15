@@ -11,9 +11,10 @@ interface AirportState {
     isLoading: boolean;
     setUser: (user: User | null) => void;
     addAirport: (airport: Airport) => Promise<void>;
+    addAirports: (airports: Airport[]) => Promise<void>;
     removeAirport: (id: string) => Promise<void>;
     syncAirports: () => Promise<void>;
-    importFlightLog: (entries: FlightLogEntry[]) => Promise<void>;
+    importFlightLog: (entries: FlightLogEntry[]) => Promise<Airport[]>;
     addManualAirport: (input: string, type: AirportType) => Promise<{
         status: 'success' | 'ambiguous' | 'not_found';
         candidates?: any[];
@@ -176,6 +177,33 @@ export const useAirportStore = create<AirportState>()(
                     });
                     if (error) {
                         console.error('Supabase error:', error);
+                    }
+                }
+            },
+            addAirports: async (newAirports) => {
+                const { user } = get();
+                if (newAirports.length === 0) return;
+
+                set((state) => ({
+                    airports: [...state.airports, ...newAirports],
+                    focusAirportId: newAirports[newAirports.length - 1].id
+                }));
+
+                if (user) {
+                    const dbEntries = newAirports.map(a => ({
+                        id: a.id,
+                        user_id: user.id,
+                        code: a.code,
+                        name: a.name,
+                        lat: a.lat,
+                        lng: a.lng,
+                        type: a.type,
+                        notes: a.notes,
+                        date_visited: a.dateVisited
+                    }));
+                    const { error } = await supabase.from('airports').insert(dbEntries);
+                    if (error) {
+                        console.error('Supabase error:', error);
                         alert(`Failed to save to cloud: ${error.message}`);
                     }
                 }
@@ -256,9 +284,10 @@ export const useAirportStore = create<AirportState>()(
                 }
             },
             importFlightLog: async (entries) => {
-                const { airports, user } = get();
+                const { airports } = get();
                 const newAirports: Airport[] = [];
-                const seenCodes = new Set(airports.map(a => a.code));
+                const seenCodesInOperation = new Set<string>();
+                const existingCodes = new Set(airports.map(a => a.code));
 
                 try {
                     const allAirports = await fetchAirportDB();
@@ -285,7 +314,6 @@ export const useAirportStore = create<AirportState>()(
                         }
                     };
 
-                    console.log('Building lookup map...');
                     allAirports.forEach((ap: any) => {
                         setIfBetter(ap.ident, ap);
                         setIfBetter(ap.icao_code, ap);
@@ -294,15 +322,16 @@ export const useAirportStore = create<AirportState>()(
                         setIfBetter(ap.local_code, ap);
                     });
 
-                    console.log(`Processing ${entries.length} log entries...`);
                     entries.forEach(entry => {
                         const processCode = (rawCode: string) => {
                             if (!rawCode) return;
                             const code = rawCode.trim().toUpperCase();
-                            if (!code || seenCodes.has(code)) return;
+                            if (!code || existingCodes.has(code) || seenCodesInOperation.has(code)) return;
 
                             const data = lookupMap.get(code);
                             if (data) {
+                                if (seenCodesInOperation.has(data.ident) || existingCodes.has(data.ident)) return;
+
                                 newAirports.push({
                                     id: crypto.randomUUID(),
                                     code: data.ident,
@@ -313,45 +342,24 @@ export const useAirportStore = create<AirportState>()(
                                     dateVisited: entry.date,
                                     notes: `Imported from flight log.`
                                 });
-                                seenCodes.add(code);
-                                seenCodes.add(data.ident);
+                                seenCodesInOperation.add(code);
+                                seenCodesInOperation.add(data.ident);
                             }
                         };
                         processCode(entry.from);
                         processCode(entry.to);
+
+                        // Process route field if it exists
+                        if (entry.route) {
+                            const routeCodes = entry.route.split(/[\s->]+/).filter(Boolean);
+                            routeCodes.forEach(code => processCode(code));
+                        }
                     });
 
-                    console.log(`Matched ${newAirports.length} new airports.`);
-
-                    if (newAirports.length > 0) {
-                        set((state) => ({ airports: [...state.airports, ...newAirports] }));
-
-                        if (user) {
-                            console.log(`Syncing ${newAirports.length} airports to Supabase...`);
-                            const dbEntries = newAirports.map(a => ({
-                                id: a.id,
-                                user_id: user.id,
-                                code: a.code,
-                                name: a.name,
-                                lat: a.lat,
-                                lng: a.lng,
-                                type: a.type,
-                                notes: a.notes,
-                                date_visited: a.dateVisited
-                            }));
-                            const { error } = await supabase.from('airports').insert(dbEntries);
-                            if (error) {
-                                console.error('Supabase error during import:', error);
-                                alert(`Failed to sync imported data: ${error.message}`);
-                            }
-                        }
-                        alert(`Successfully added ${newAirports.length} new airports from your log!`);
-                    } else {
-                        alert('Log processed. No new airports found to add.');
-                    }
+                    return newAirports;
                 } catch (error) {
                     console.error("Failed to map airports", error);
-                    alert("Error loading airport database.");
+                    throw error;
                 }
             },
             clearAirports: async () => {
