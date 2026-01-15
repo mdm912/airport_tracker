@@ -79,7 +79,6 @@ const MapComponent: React.FC = () => {
                         minZoom={0}
                         maxZoom={20}
                         maxNativeZoom={12}
-                        detectRetina={true}
                         opacity={1}
                         zIndex={100}
                     />
