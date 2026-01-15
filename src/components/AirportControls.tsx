@@ -272,9 +272,19 @@ const AirportControls: React.FC = () => {
                                                     <Square className="h-4 w-4 text-gray-300" />
                                                 )}
                                                 <div className="min-w-0 flex-1">
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="font-bold text-xs">{ap.code}</span>
-                                                        <span className="text-[10px] text-gray-400 truncate">{ap.name}</span>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="font-bold text-xs">{ap.code}</span>
+                                                            <span className="text-[10px] text-gray-400 truncate max-w-[120px]">{ap.name}</span>
+                                                        </div>
+                                                        {ap.source && (
+                                                            <span className={`text-[8px] uppercase px-1.5 py-0.5 rounded-full font-bold border ${ap.source === 'from' ? 'bg-blue-50 text-blue-600 border-blue-100' :
+                                                                    ap.source === 'to' ? 'bg-green-50 text-green-600 border-green-100' :
+                                                                        'bg-purple-50 text-purple-600 border-purple-100'
+                                                                }`}>
+                                                                {ap.source}
+                                                            </span>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>

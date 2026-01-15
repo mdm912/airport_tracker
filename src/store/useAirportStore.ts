@@ -323,7 +323,7 @@ export const useAirportStore = create<AirportState>()(
                     });
 
                     entries.forEach(entry => {
-                        const processCode = (rawCode: string) => {
+                        const processCode = (rawCode: string, source: 'from' | 'to' | 'route') => {
                             if (!rawCode) return;
                             const code = rawCode.trim().toUpperCase();
                             if (!code || existingCodes.has(code) || seenCodesInOperation.has(code)) return;
@@ -340,19 +340,20 @@ export const useAirportStore = create<AirportState>()(
                                     lng: parseFloat(data.longitude_deg),
                                     type: 'visited',
                                     dateVisited: entry.date,
-                                    notes: `Imported from flight log.`
+                                    notes: `Imported from flight log.`,
+                                    source: source
                                 });
                                 seenCodesInOperation.add(code);
                                 seenCodesInOperation.add(data.ident);
                             }
                         };
-                        processCode(entry.from);
-                        processCode(entry.to);
+                        processCode(entry.from, 'from');
+                        processCode(entry.to, 'to');
 
                         // Process route field if it exists
                         if (entry.route) {
                             const routeCodes = entry.route.split(/[\s->]+/).filter(Boolean);
-                            routeCodes.forEach(code => processCode(code));
+                            routeCodes.forEach(code => processCode(code, 'route'));
                         }
                     });
 

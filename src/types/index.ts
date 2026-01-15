@@ -9,6 +9,7 @@ export interface Airport {
     type: AirportType;
     notes?: string;
     dateVisited?: string; // ISO date string
+    source?: 'from' | 'to' | 'route';
 }
 
 export interface FlightLogEntry {
