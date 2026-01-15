@@ -56,6 +56,31 @@ const FocusHandler: React.FC<{ markerRefs: React.MutableRefObject<Map<string, L.
     return null;
 };
 
+const ZoomDisplay: React.FC = () => {
+    const map = useMap();
+    const [zoom, setZoom] = React.useState(map.getZoom());
+
+    React.useEffect(() => {
+        const updateZoom = () => {
+            setZoom(map.getZoom());
+        };
+
+        map.on('zoomend', updateZoom);
+        return () => {
+            map.off('zoomend', updateZoom);
+        };
+    }, [map]);
+
+    return (
+        <div className="leaflet-top leaflet-left" style={{ marginTop: '10px', marginLeft: '10px', pointerEvents: 'none' }}>
+            <div className="bg-white px-3 py-2 rounded-lg shadow-lg border border-gray-200">
+                <div className="text-xs font-mono text-gray-500">Zoom Level</div>
+                <div className="text-2xl font-bold text-gray-900">{zoom}</div>
+            </div>
+        </div>
+    );
+};
+
 const MapComponent: React.FC = () => {
     const { airports, removeAirport, mapLayer } = useAirportStore();
     const markerRefs = useRef<Map<string, L.Marker>>(new Map());
@@ -64,6 +89,7 @@ const MapComponent: React.FC = () => {
         <div className="h-full w-full relative z-0">
             <MapContainer center={[47.5, -122.2]} zoom={8} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full">
                 <FocusHandler markerRefs={markerRefs} />
+                <ZoomDisplay />
                 {/* Base Layer (OSM fallback) */}
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
