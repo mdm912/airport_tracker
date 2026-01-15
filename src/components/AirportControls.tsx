@@ -77,10 +77,10 @@ const AirportControls: React.FC = () => {
                     route: row[routeIndex]
                 })).filter(entry => entry.date && entry.from && entry.to);
 
-                console.log(`[V1.7] Parsed ${entries.length} valid flight entries.`);
+                console.log(`[V1.8] Parsed ${entries.length} valid flight entries.`);
 
                 importFlightLog(entries).then((foundAirports) => {
-                    console.log(`[V1.7] Store returned ${foundAirports.length} new airports.`);
+                    console.log(`[V1.8] Store returned ${foundAirports.length} new airports.`);
                     if (foundAirports.length === 0) {
                         alert('Log processed. No new airports found to add.');
                         return;

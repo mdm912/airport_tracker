@@ -68,6 +68,7 @@ const MapComponent: React.FC = () => {
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    detectRetina={true}
                 />
 
                 {/* VFR Overlay */}
@@ -77,7 +78,8 @@ const MapComponent: React.FC = () => {
                         url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
                         minZoom={0}
                         maxZoom={20}
-                        maxNativeZoom={10}
+                        maxNativeZoom={12}
+                        detectRetina={true}
                         opacity={1}
                         zIndex={100}
                     />
