@@ -104,11 +104,20 @@ const MapComponent: React.FC = () => {
                         url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
                         minZoom={8}
                         maxZoom={12}
-                        minNativeZoom={9}
-                        maxNativeZoom={11}
                         detectRetina={true}
                         opacity={1}
                         zIndex={100}
+                        // Custom tile loading to handle missing zoom levels
+                        // @ts-ignore - getTileUrl is a valid Leaflet option
+                        getTileUrl={function (coords: any) {
+                            // Map zoom levels: 10->9, 12->11, 8->9
+                            let adjustedZoom = coords.z;
+                            if (coords.z === 10) adjustedZoom = 9;
+                            else if (coords.z === 12) adjustedZoom = 11;
+                            else if (coords.z === 8) adjustedZoom = 9;
+
+                            return `https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/${adjustedZoom}/${coords.y}/${coords.x}`;
+                        }}
                     />
                 )}
                 {airports.map((airport) => (
