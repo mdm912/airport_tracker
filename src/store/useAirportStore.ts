@@ -62,6 +62,11 @@ const fetchAirportDB = async () => {
     });
 };
 
+const isSharedFromUrl = () => {
+    if (typeof window === 'undefined') return false;
+    return new URLSearchParams(window.location.search).has('share');
+};
+
 export const useAirportStore = create<AirportState>()(
     persist(
         (set, get) => ({
@@ -72,7 +77,7 @@ export const useAirportStore = create<AirportState>()(
             setFocusAirportId: (id) => set({ focusAirportId: id }),
             focusBounds: null,
             setFocusBounds: (bounds) => set({ focusBounds: bounds }),
-            isSharedView: false,
+            isSharedView: isSharedFromUrl(),
             setSharedView: (isShared) => set({ isSharedView: isShared }),
             setAirports: (airports) => set({ airports }),
             mapLayer: 'sectional',
@@ -441,7 +446,10 @@ export const useAirportStore = create<AirportState>()(
         }),
         {
             name: 'airport-storage',
-            partialize: (state) => ({ airports: state.airports }), // Don't persist user state
+            partialize: (state) => {
+                if (state.isSharedView) return {}; // Don't persist shared view airports
+                return { airports: state.airports };
+            },
         }
     )
 );
