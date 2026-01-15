@@ -62,7 +62,7 @@ const MapComponent: React.FC = () => {
 
     return (
         <div className="h-full w-full relative z-0">
-            <MapContainer center={[47.5, -122.2]} zoom={10} scrollWheelZoom={true} className="h-full w-full">
+            <MapContainer center={[47.5, -122.2]} zoom={10} maxZoom={12} scrollWheelZoom={true} className="h-full w-full">
                 <FocusHandler markerRefs={markerRefs} />
                 {/* Base Layer (Always visible) */}
                 <TileLayer
