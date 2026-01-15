@@ -258,10 +258,10 @@ export const useAirportStore = create<AirportState>()(
                         return { status: 'not_found', message: `No exact code or name matches for "${input}".` };
                     }
 
-                    // Strict matching for 3-alpha identifiers in the US to avoid VOR conflicts
+                    // Strict matching for 3-alpha identifiers globally to avoid VOR conflicts
                     const cleanInput = input.trim().toUpperCase();
                     const isThreeAlpha = /^[A-Z]{3}$/.test(cleanInput);
-                    if (isThreeAlpha && entry.iso_country === 'US' && entry.ident !== cleanInput) {
+                    if (isThreeAlpha && entry.ident !== cleanInput) {
                         return { status: 'not_found', message: `Matched ${entry.name} (${entry.ident}), but skipping because "${cleanInput}" is likely a VOR waypoint, not the airport itself.` };
                     }
 
@@ -345,9 +345,9 @@ export const useAirportStore = create<AirportState>()(
                             if (data) {
                                 if (seenCodesInOperation.has(data.ident) || existingCodes.has(data.ident)) return;
 
-                                // Strict avoidance of 3-alpha matches in US that are likely VORs (e.g. SAC vs KSAC)
+                                // Strict avoidance of 3-alpha matches globally that are likely VORs (e.g. SAC vs KSAC, LIN vs LIML)
                                 const isThreeAlpha = /^[A-Z]{3}$/.test(code);
-                                if (isThreeAlpha && data.iso_country === 'US' && data.ident !== code) {
+                                if (isThreeAlpha && data.ident !== code) {
                                     return; // Skip VOR waypoint conflicts
                                 }
 
