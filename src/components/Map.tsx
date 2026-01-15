@@ -19,7 +19,7 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const FocusHandler: React.FC<{ markerRefs: React.MutableRefObject<Map<string, L.Marker>> }> = ({ markerRefs }) => {
     const map = useMap();
-    const { focusAirportId, airports, setFocusAirportId } = useAirportStore();
+    const { focusAirportId, airports, setFocusAirportId, focusBounds, setFocusBounds } = useAirportStore();
 
     useEffect(() => {
         if (focusAirportId) {
@@ -34,13 +34,24 @@ const FocusHandler: React.FC<{ markerRefs: React.MutableRefObject<Map<string, L.
                 // Small delay to ensure flyTo has started/finished or marker is ready
                 setTimeout(() => {
                     marker.openPopup();
-                    // Clear focus after handled so it can be re-triggered if needed
-                    // (But only clear if it's still the same ID to avoid races)
                     setFocusAirportId(null);
                 }, 500);
             }
         }
     }, [focusAirportId, airports, map, markerRefs, setFocusAirportId]);
+
+    useEffect(() => {
+        if (focusBounds && focusBounds.length > 0) {
+            map.fitBounds(focusBounds, {
+                padding: [50, 50],
+                maxZoom: 12,
+                animate: true,
+                duration: 1.5
+            });
+            // Clear bounds after handled
+            setFocusBounds(null);
+        }
+    }, [focusBounds, map, setFocusBounds]);
 
     return null;
 };

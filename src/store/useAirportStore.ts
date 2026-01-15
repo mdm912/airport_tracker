@@ -27,6 +27,8 @@ interface AirportState {
     loadUserAirports: (userId: string) => Promise<void>;
     focusAirportId: string | null;
     setFocusAirportId: (id: string | null) => void;
+    focusBounds: [number, number][] | null;
+    setFocusBounds: (bounds: [number, number][] | null) => void;
     isSharedView: boolean;
     setSharedView: (isShared: boolean) => void;
     setAirports: (airports: Airport[]) => void;
@@ -68,6 +70,8 @@ export const useAirportStore = create<AirportState>()(
             isLoading: false,
             focusAirportId: null,
             setFocusAirportId: (id) => set({ focusAirportId: id }),
+            focusBounds: null,
+            setFocusBounds: (bounds) => set({ focusBounds: bounds }),
             isSharedView: false,
             setSharedView: (isShared) => set({ isSharedView: isShared }),
             setAirports: (airports) => set({ airports }),
@@ -184,10 +188,20 @@ export const useAirportStore = create<AirportState>()(
                 const { user } = get();
                 if (newAirports.length === 0) return;
 
-                set((state) => ({
-                    airports: [...state.airports, ...newAirports],
-                    focusAirportId: newAirports[newAirports.length - 1].id
-                }));
+                if (newAirports.length === 1) {
+                    set((state) => ({
+                        airports: [...state.airports, ...newAirports],
+                        focusAirportId: newAirports[0].id,
+                        focusBounds: null
+                    }));
+                } else {
+                    const bounds = newAirports.map(a => [a.lat, a.lng] as [number, number]);
+                    set((state) => ({
+                        airports: [...state.airports, ...newAirports],
+                        focusAirportId: null,
+                        focusBounds: bounds
+                    }));
+                }
 
                 if (user) {
                     const dbEntries = newAirports.map(a => ({
