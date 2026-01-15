@@ -104,8 +104,8 @@ const MapComponent: React.FC = () => {
                         url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
                         minZoom={8}
                         maxZoom={12}
-                        minNativeZoom={8}
-                        maxNativeZoom={14}
+                        minNativeZoom={9}
+                        maxNativeZoom={11}
                         detectRetina={true}
                         opacity={1}
                         zIndex={100}
