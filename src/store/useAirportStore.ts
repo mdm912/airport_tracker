@@ -297,71 +297,99 @@ export const useAirportStore = create<AirportState>()(
 
                 try {
                     const allAirports = await fetchAirportDB();
-                    const lookupMap = new Map<string, any>();
+                    // Each code maps to an array of possible airports
+                    const lookupMap = new Map<string, any[]>();
 
-                    const setIfBetter = (code: string, ap: any) => {
+                    const addToMap = (code: string, ap: any) => {
                         if (!code) return;
-                        const existing = lookupMap.get(code);
-                        if (!existing) {
-                            lookupMap.set(code, ap);
-                            return;
-                        }
-                        const getScore = (a: any) => {
-                            let score = 0;
-                            if (a.iso_country === 'US') score += 10;
-                            if (a.type === 'large_airport') score += 5;
-                            if (a.type === 'medium_airport') score += 3;
-                            if (a.type === 'small_airport') score += 1;
-                            if (a.ident === code) score += 20;
-                            return score;
-                        };
-                        if (getScore(ap) > getScore(existing)) {
-                            lookupMap.set(code, ap);
-                        }
+                        if (!lookupMap.has(code)) lookupMap.set(code, []);
+                        lookupMap.get(code)?.push(ap);
                     };
 
                     allAirports.forEach((ap: any) => {
-                        setIfBetter(ap.ident, ap);
-                        setIfBetter(ap.icao_code, ap);
-                        setIfBetter(ap.iata_code, ap);
-                        setIfBetter(ap.gps_code, ap);
-                        setIfBetter(ap.local_code, ap);
+                        addToMap(ap.ident, ap);
+                        addToMap(ap.icao_code, ap);
+                        addToMap(ap.iata_code, ap);
+                        addToMap(ap.gps_code, ap);
+                        addToMap(ap.local_code, ap);
                     });
 
+                    // Utility to find the "best" airport from a list of candidates
+                    const findBest = (candidates: any[], targetCode: string, preferredCountries?: string[]) => {
+                        if (!candidates || candidates.length === 0) return null;
+
+                        return [...candidates].sort((a, b) => {
+                            const getScore = (ap: any) => {
+                                let score = 0;
+                                if (preferredCountries?.includes(ap.iso_country)) score += 50;
+                                if (ap.iso_country === 'US') score += 10;
+                                if (ap.type === 'large_airport') score += 5;
+                                if (ap.type === 'medium_airport') score += 3;
+                                if (ap.type === 'small_airport') score += 1;
+                                if (ap.ident === targetCode) score += 20;
+                                if (ap.type === 'closed') score -= 100;
+                                return score;
+                            };
+                            return getScore(b) - getScore(a);
+                        })[0];
+                    };
+
                     entries.forEach(entry => {
+                        const fromCode = entry.from.trim().toUpperCase();
+                        const toCode = entry.to.trim().toUpperCase();
+
+                        // 1. Find best From/To to establish country context
+                        const fromAp = findBest(lookupMap.get(fromCode) || [], fromCode);
+                        const toAp = findBest(lookupMap.get(toCode) || [], toCode);
+
+                        const contextCountries = Array.from(new Set([fromAp?.iso_country, toAp?.iso_country].filter(Boolean) as string[]));
+
                         const processCode = (rawCode: string, source: 'from' | 'to' | 'route') => {
                             if (!rawCode) return;
                             const code = rawCode.trim().toUpperCase();
-                            if (!code || existingCodes.has(code) || seenCodesInOperation.has(code)) return;
 
-                            const data = lookupMap.get(code);
-                            if (data) {
-                                if (seenCodesInOperation.has(data.ident) || existingCodes.has(data.ident)) return;
+                            const candidates = lookupMap.get(code) || [];
+                            if (candidates.length === 0) return;
 
-                                // Prefer the log code if it matches IATA or Local code
-                                let finalCode = data.ident;
-                                if (data.iata_code === code || data.local_code === code) {
-                                    finalCode = code;
-                                }
-
-                                if (existingCodes.has(finalCode) || seenCodesInOperation.has(finalCode)) return;
-
-                                newAirports.push({
-                                    id: crypto.randomUUID(),
-                                    code: finalCode,
-                                    name: data.name,
-                                    lat: parseFloat(data.latitude_deg),
-                                    lng: parseFloat(data.longitude_deg),
-                                    type: 'visited',
-                                    dateVisited: entry.date,
-                                    notes: `Imported from flight log.`,
-                                    source: source
-                                });
-                                seenCodesInOperation.add(code);
-                                seenCodesInOperation.add(data.ident);
-                                seenCodesInOperation.add(finalCode);
+                            // For route airports, we ONLY consider airports in the context countries
+                            // This filters out Nav Aids (which won't be in our DB) or international airports with same code.
+                            let filteredCandidates = candidates;
+                            if (source === 'route' && contextCountries.length > 0) {
+                                filteredCandidates = candidates.filter(ap => contextCountries.includes(ap.iso_country));
                             }
+
+                            // Also filter out closed airports for route
+                            if (source === 'route') {
+                                filteredCandidates = filteredCandidates.filter(ap => ap.type !== 'closed');
+                            }
+
+                            const best = findBest(filteredCandidates, code, contextCountries);
+                            if (!best) return;
+
+                            // Prefer the log code if it matches IATA or Local code
+                            let finalCode = best.ident;
+                            if (best.iata_code === code || best.local_code === code) {
+                                finalCode = code;
+                            }
+
+                            if (existingCodes.has(finalCode) || seenCodesInOperation.has(finalCode)) return;
+
+                            newAirports.push({
+                                id: crypto.randomUUID(),
+                                code: finalCode,
+                                name: best.name,
+                                lat: parseFloat(best.latitude_deg),
+                                lng: parseFloat(best.longitude_deg),
+                                type: 'visited',
+                                dateVisited: entry.date,
+                                notes: `Imported from flight log.`,
+                                source: source
+                            });
+                            seenCodesInOperation.add(code);
+                            seenCodesInOperation.add(best.ident);
+                            seenCodesInOperation.add(finalCode);
                         };
+
                         processCode(entry.from, 'from');
                         processCode(entry.to, 'to');
 

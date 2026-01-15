@@ -77,10 +77,10 @@ const AirportControls: React.FC = () => {
                     route: row[routeIndex]
                 })).filter(entry => entry.date && entry.from && entry.to);
 
-                console.log(`[V1.1] Parsed ${entries.length} valid flight entries.`);
+                console.log(`[V1.2] Parsed ${entries.length} valid flight entries.`);
 
                 importFlightLog(entries).then((foundAirports) => {
-                    console.log(`[V1.1] Store returned ${foundAirports.length} new airports.`);
+                    console.log(`[V1.2] Store returned ${foundAirports.length} new airports.`);
                     if (foundAirports.length === 0) {
                         alert('Log processed. No new airports found to add.');
                         return;
@@ -279,8 +279,8 @@ const AirportControls: React.FC = () => {
                                                         </div>
                                                         {ap.source && (
                                                             <span className={`text-[8px] uppercase px-1.5 py-0.5 rounded-full font-bold border ${ap.source === 'from' ? 'bg-blue-50 text-blue-600 border-blue-100' :
-                                                                    ap.source === 'to' ? 'bg-green-50 text-green-600 border-green-100' :
-                                                                        'bg-purple-50 text-purple-600 border-purple-100'
+                                                                ap.source === 'to' ? 'bg-green-50 text-green-600 border-green-100' :
+                                                                    'bg-purple-50 text-purple-600 border-purple-100'
                                                                 }`}>
                                                                 {ap.source}
                                                             </span>
