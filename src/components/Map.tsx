@@ -81,6 +81,39 @@ const ZoomDisplay: React.FC = () => {
     );
 };
 
+const VFRTileLayer: React.FC = () => {
+    const map = useMap();
+    const [currentZoom, setCurrentZoom] = React.useState(map.getZoom());
+
+    React.useEffect(() => {
+        const updateZoom = () => {
+            setCurrentZoom(map.getZoom());
+        };
+
+        map.on('zoomend', updateZoom);
+        return () => {
+            map.off('zoomend', updateZoom);
+        };
+    }, [map]);
+
+    // At zoom 10, use zoom 9 tiles to avoid 404s
+    const effectiveZoom = currentZoom === 10 ? 9 : currentZoom;
+
+    return (
+        <TileLayer
+            key={`vfr-${effectiveZoom}`}
+            attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
+            url={`https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/${effectiveZoom}/{y}/{x}`}
+            minZoom={8}
+            maxZoom={12}
+            maxNativeZoom={11}
+            detectRetina={true}
+            opacity={1}
+            zIndex={100}
+        />
+    );
+};
+
 const MapComponent: React.FC = () => {
     const { airports, removeAirport, mapLayer } = useAirportStore();
     const markerRefs = useRef<Map<string, L.Marker>>(new Map());
@@ -97,21 +130,8 @@ const MapComponent: React.FC = () => {
                     detectRetina={true}
                 />
 
-                {/* VFR Overlay - tiles have gaps at zoom 10 and 12 despite service metadata */}
-                {mapLayer === 'sectional' && (
-                    <TileLayer
-                        attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
-                        url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
-                        minZoom={8}
-                        maxZoom={12}
-                        maxNativeZoom={11}
-                        detectRetina={true}
-                        opacity={1}
-                        zIndex={100}
-                        // Prevent tile loading at zoom 10 where tiles don't exist
-                        bounds={[[-90, -180], [90, 180]]}
-                    />
-                )}
+                {/* VFR Overlay - custom component handles zoom 10 by using zoom 9 tiles */}
+                {mapLayer === 'sectional' && <VFRTileLayer />}
                 {airports.map((airport) => (
                     <Marker
                         key={airport.id}
