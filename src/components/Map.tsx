@@ -97,7 +97,7 @@ const MapComponent: React.FC = () => {
                     detectRetina={true}
                 />
 
-                {/* VFR Overlay - only show when sectional mode is active AND at appropriate zoom levels */}
+                {/* VFR Overlay - tiles exist at zoom 8-12 per service metadata */}
                 {mapLayer === 'sectional' && (
                     <TileLayer
                         attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
@@ -107,30 +107,6 @@ const MapComponent: React.FC = () => {
                         detectRetina={true}
                         opacity={1}
                         zIndex={100}
-                        // Custom tile loading to handle missing zoom levels
-                        // @ts-ignore - getTileUrl is a valid Leaflet option
-                        getTileUrl={function (coords: any) {
-                            // Map zoom levels: 10->9, 12->11, 8->9
-                            let adjustedZoom = coords.z;
-                            let x = coords.x;
-                            let y = coords.y;
-
-                            if (coords.z === 10) {
-                                adjustedZoom = 9;
-                                x = Math.floor(coords.x / 2);
-                                y = Math.floor(coords.y / 2);
-                            } else if (coords.z === 12) {
-                                adjustedZoom = 11;
-                                x = Math.floor(coords.x / 2);
-                                y = Math.floor(coords.y / 2);
-                            } else if (coords.z === 8) {
-                                adjustedZoom = 9;
-                                x = Math.floor(coords.x * 2);
-                                y = Math.floor(coords.y * 2);
-                            }
-
-                            return `https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/${adjustedZoom}/${y}/${x}`;
-                        }}
                     />
                 )}
                 {airports.map((airport) => (
