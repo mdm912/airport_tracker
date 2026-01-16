@@ -8,7 +8,7 @@ function App() {
   const { user, loadUserAirports, syncAirports, isSharedView, setSharedView, setAirports } = useAirportStore();
 
   useEffect(() => {
-    console.log('[V1.23] Airport Tracker initialized');
+    console.log('[V1.24] Airport Tracker initialized');
   }, []);
 
   useEffect(() => {

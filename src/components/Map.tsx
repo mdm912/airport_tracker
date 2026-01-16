@@ -96,17 +96,17 @@ const VFRTileLayer: React.FC = () => {
         };
     }, [map]);
 
-    // At zoom 10, use zoom 9 tiles to avoid 404s
-    const effectiveZoom = currentZoom === 10 ? 9 : currentZoom;
+    // Only show VFR at zoom levels where tiles actually exist (not 10 or 12)
+    const showVFR = currentZoom !== 10 && currentZoom !== 12;
+
+    if (!showVFR) return null;
 
     return (
         <TileLayer
-            key={`vfr-${effectiveZoom}`}
             attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
-            url={`https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/${effectiveZoom}/{y}/{x}`}
+            url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
             minZoom={8}
             maxZoom={12}
-            maxNativeZoom={11}
             detectRetina={true}
             opacity={1}
             zIndex={100}
