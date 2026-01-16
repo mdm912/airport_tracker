@@ -97,16 +97,19 @@ const MapComponent: React.FC = () => {
                     detectRetina={true}
                 />
 
-                {/* VFR Overlay - tiles exist at zoom 8-12 per service metadata */}
+                {/* VFR Overlay - tiles have gaps at zoom 10 and 12 despite service metadata */}
                 {mapLayer === 'sectional' && (
                     <TileLayer
                         attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
                         url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
                         minZoom={8}
                         maxZoom={12}
+                        maxNativeZoom={11}
                         detectRetina={true}
                         opacity={1}
                         zIndex={100}
+                        // Prevent tile loading at zoom 10 where tiles don't exist
+                        bounds={[[-90, -180], [90, 180]]}
                     />
                 )}
                 {airports.map((airport) => (

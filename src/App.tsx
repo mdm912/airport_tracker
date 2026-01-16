@@ -8,7 +8,7 @@ function App() {
   const { user, loadUserAirports, syncAirports, isSharedView, setSharedView, setAirports } = useAirportStore();
 
   useEffect(() => {
-    console.log('[V1.21] Airport Tracker initialized - VFR tiles should work at all zoom levels 8-12');
+    console.log('[V1.22] Airport Tracker initialized');
   }, []);
 
   useEffect(() => {
