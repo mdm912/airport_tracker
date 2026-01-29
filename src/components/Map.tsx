@@ -82,34 +82,29 @@ const ZoomDisplay: React.FC = () => {
 };
 
 const VFRTileLayer: React.FC = () => {
-    const map = useMap();
-    const [currentZoom, setCurrentZoom] = React.useState(map.getZoom());
-
-    React.useEffect(() => {
-        const updateZoom = () => {
-            setCurrentZoom(map.getZoom());
-        };
-
-        map.on('zoomend', updateZoom);
-        return () => {
-            map.off('zoomend', updateZoom);
-        };
-    }, [map]);
-
-    // Only show VFR at zoom levels where tiles actually exist (not 10 or 12)
-    const showVFR = currentZoom !== 10 && currentZoom !== 12;
-
-    if (!showVFR) return null;
-
     return (
         <TileLayer
             attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
             url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
             minZoom={8}
             maxZoom={12}
-            detectRetina={true}
+            maxNativeZoom={12}
             opacity={1}
             zIndex={100}
+        />
+    );
+};
+
+const TACTileLayer: React.FC = () => {
+    return (
+        <TileLayer
+            attribution='FAA Terminal Area Charts &copy; <a href="https://www.faa.gov">FAA</a>'
+            url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Terminal/MapServer/tile/{z}/{y}/{x}"
+            minZoom={10}
+            maxZoom={12}
+            maxNativeZoom={12}
+            opacity={1}
+            zIndex={101}
         />
     );
 };
@@ -131,7 +126,12 @@ const MapComponent: React.FC = () => {
                 />
 
                 {/* VFR Overlay - custom component handles zoom 10 by using zoom 9 tiles */}
-                {mapLayer === 'sectional' && <VFRTileLayer />}
+                {mapLayer === 'sectional' && (
+                    <>
+                        <VFRTileLayer />
+                        <TACTileLayer />
+                    </>
+                )}
                 {airports.map((airport) => (
                     <Marker
                         key={airport.id}
