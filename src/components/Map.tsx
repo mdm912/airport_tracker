@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useAirportStore } from '../store/useAirportStore';
 import L from 'leaflet';
+import { Plus, Minus } from 'lucide-react';
 
 // Fix for default marker icon in Leaflet with Webpack/Vite
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -26,16 +27,21 @@ const FocusHandler: React.FC<{ markerRefs: React.MutableRefObject<Map<string, L.
             const airport = airports.find(a => a.id === focusAirportId);
             const marker = markerRefs.current.get(focusAirportId);
 
-            if (airport && marker) {
+            if (airport) {
+                // Always fly to location, even if marker ref is missing
                 map.flyTo([airport.lat, airport.lng], 12, {
                     duration: 1.5
                 });
 
-                // Small delay to ensure flyTo has started/finished or marker is ready
-                setTimeout(() => {
-                    marker.openPopup();
-                    setFocusAirportId(null);
-                }, 500);
+                // Try to open popup if marker exists
+                if (marker) {
+                    setTimeout(() => {
+                        marker.openPopup();
+                    }, 500);
+                }
+
+                // Clear focus immediately after dispatching actions
+                setFocusAirportId(null);
             }
         }
     }, [focusAirportId, airports, map, markerRefs, setFocusAirportId]);
@@ -56,7 +62,7 @@ const FocusHandler: React.FC<{ markerRefs: React.MutableRefObject<Map<string, L.
     return null;
 };
 
-const ZoomDisplay: React.FC = () => {
+const CustomZoomControl: React.FC = () => {
     const map = useMap();
     const [zoom, setZoom] = React.useState(map.getZoom());
 
@@ -71,40 +77,79 @@ const ZoomDisplay: React.FC = () => {
         };
     }, [map]);
 
+    const handleZoomIn = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        map.zoomIn();
+    };
+
+    const handleZoomOut = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        map.zoomOut();
+    };
+
     return (
-        <div className="leaflet-top leaflet-left" style={{ marginTop: '10px', marginLeft: '10px', pointerEvents: 'none' }}>
-            <div className="bg-white px-3 py-2 rounded-lg shadow-lg border border-gray-200">
-                <div className="text-xs font-mono text-gray-500">Zoom Level</div>
-                <div className="text-2xl font-bold text-gray-900">{zoom}</div>
+        <div className="leaflet-top leaflet-left">
+            <div className="leaflet-control leaflet-bar flex flex-col items-center bg-white shadow-md rounded-md overflow-hidden border-2 border-rgba(0,0,0,0.2) mt-2.5 ml-2.5">
+                <button
+                    onClick={handleZoomIn}
+                    className="p-2 hover:bg-gray-100 border-b border-gray-200 transition-colors w-full flex justify-center bg-white cursor-pointer"
+                    title="Zoom In"
+                >
+                    <Plus className="h-4 w-4 text-gray-700" />
+                </button>
+                <div
+                    className="px-2 py-1 text-xs font-bold text-gray-900 bg-gray-50 flex justify-center items-center w-full select-none cursor-default"
+                    title={`Current Zoom Level: ${zoom}`}
+                >
+                    {zoom}
+                </div>
+                <button
+                    onClick={handleZoomOut}
+                    className="p-2 hover:bg-gray-100 border-t border-gray-200 transition-colors w-full flex justify-center bg-white cursor-pointer"
+                    title="Zoom Out"
+                >
+                    <Minus className="h-4 w-4 text-gray-700" />
+                </button>
             </div>
         </div>
     );
 };
 
+
+
 const VFRTileLayer: React.FC = () => {
+    const { mapSettings } = useAirportStore();
     return (
         <TileLayer
+            key={`vfr-${mapSettings.detectRetina}-${mapSettings.pixelated}`}
             attribution='FAA VFR Sectional &copy; <a href="https://www.faa.gov">FAA</a>'
             url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Sectional/MapServer/tile/{z}/{y}/{x}"
-            minZoom={8}
-            maxZoom={12}
-            maxNativeZoom={12}
+            minZoom={5}
+            minNativeZoom={8}
+            maxZoom={22}
+            maxNativeZoom={11}
             opacity={1}
             zIndex={100}
+            detectRetina={mapSettings.detectRetina}
+            className={mapSettings.pixelated ? "pixelated-tiles" : ""}
         />
     );
 };
 
 const TACTileLayer: React.FC = () => {
+    const { mapSettings } = useAirportStore();
     return (
         <TileLayer
+            key={`tac-${mapSettings.detectRetina}-${mapSettings.pixelated}`}
             attribution='FAA Terminal Area Charts &copy; <a href="https://www.faa.gov">FAA</a>'
             url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Terminal/MapServer/tile/{z}/{y}/{x}"
             minZoom={10}
-            maxZoom={12}
-            maxNativeZoom={12}
+            maxZoom={22}
+            maxNativeZoom={11}
             opacity={1}
             zIndex={101}
+            detectRetina={mapSettings.detectRetina}
+            className={mapSettings.pixelated ? "pixelated-tiles" : ""}
         />
     );
 };
@@ -115,9 +160,9 @@ const MapComponent: React.FC = () => {
 
     return (
         <div className="h-full w-full relative z-0">
-            <MapContainer center={[47.5, -122.2]} zoom={8} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full">
+            <MapContainer center={[47.5, -122.2]} zoom={8} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full" zoomControl={false}>
                 <FocusHandler markerRefs={markerRefs} />
-                <ZoomDisplay />
+                <CustomZoomControl />
                 {/* Base Layer (OSM fallback) */}
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -153,7 +198,10 @@ const MapComponent: React.FC = () => {
                                 <div className="text-sm mb-2">{airport.name}</div>
                                 <div className="text-[10px] uppercase font-bold text-gray-500 mb-2">{airport.type}</div>
                                 <button
-                                    onClick={() => removeAirport(airport.id)}
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Stop propagation for remove button
+                                        removeAirport(airport.id);
+                                    }}
                                     className="w-full py-1 px-2 bg-red-50 text-red-600 text-xs rounded hover:bg-red-500 hover:text-white transition-colors border border-red-100"
                                 >
                                     Remove Airport

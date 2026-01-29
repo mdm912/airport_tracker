@@ -6,7 +6,7 @@ import type { Airport, AirportType } from '../types';
 import { Auth } from './Auth';
 
 const AirportControls: React.FC = () => {
-    const { airports, user, importFlightLog, addAirports, addManualAirport, addAirport, removeAirport, clearAirports, mapLayer, setMapLayer } = useAirportStore();
+    const { airports, user, importFlightLog, addAirports, addManualAirport, addAirport, removeAirport, clearAirports, mapLayer, setMapLayer, setFocusAirportId } = useAirportStore();
     const [isOpen, setIsOpen] = useState(true);
     const [mode, setMode] = useState<'upload' | 'manual' | 'manage' | 'settings'>('upload');
     const [statusMessage, setStatusMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
@@ -456,7 +456,11 @@ const AirportControls: React.FC = () => {
                                     </div>
                                 ) : (
                                     airports.map((airport) => (
-                                        <div key={airport.id} className="flex justify-between items-center p-2 bg-gray-50 rounded-md border border-gray-100 group">
+                                        <div
+                                            key={airport.id}
+                                            onClick={() => setFocusAirportId(airport.id)}
+                                            className="flex justify-between items-center p-2 bg-gray-50 rounded-md border border-gray-100 group cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-all"
+                                        >
                                             <div className="min-w-0 flex-1">
                                                 <div className="flex items-center gap-2">
                                                     <span className="font-bold text-xs">{airport.code}</span>
@@ -465,7 +469,10 @@ const AirportControls: React.FC = () => {
                                                 <p className="text-[10px] text-gray-500 truncate">{airport.name || 'Unknown name'}</p>
                                             </div>
                                             <button
-                                                onClick={() => removeAirport(airport.id)}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    removeAirport(airport.id);
+                                                }}
                                                 className="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-all ml-2"
                                                 title="Remove"
                                             >
@@ -496,6 +503,17 @@ const AirportControls: React.FC = () => {
                                     >
                                         VFR Sectional
                                     </button>
+                                </div>
+                                <div className="space-y-2 mt-2 pt-2 border-t border-gray-100">
+                                    <label className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={useAirportStore.getState().mapSettings.pixelated}
+                                            onChange={(e) => useAirportStore.getState().updateMapSettings({ pixelated: e.target.checked })}
+                                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4"
+                                        />
+                                        <span>Pixelated Scaling (Sharp)</span>
+                                    </label>
                                 </div>
                             </div>
 

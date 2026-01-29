@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import MapComponent from './components/Map';
 import AirportControls from './components/AirportControls';

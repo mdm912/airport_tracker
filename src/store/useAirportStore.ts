@@ -12,6 +12,11 @@ interface AirportState {
     setUser: (user: User | null) => void;
     addAirport: (airport: Airport) => Promise<void>;
     addAirports: (airports: Airport[]) => Promise<void>;
+    mapSettings: {
+        detectRetina: boolean;
+        pixelated: boolean;
+    };
+    updateMapSettings: (settings: Partial<{ detectRetina: boolean; pixelated: boolean }>) => void;
     removeAirport: (id: string) => Promise<void>;
     syncAirports: () => Promise<void>;
     importFlightLog: (entries: FlightLogEntry[]) => Promise<Airport[]>;
@@ -80,6 +85,13 @@ export const useAirportStore = create<AirportState>()(
             isSharedView: isSharedFromUrl(),
             setSharedView: (isShared) => set({ isSharedView: isShared }),
             setAirports: (airports) => set({ airports }),
+            mapSettings: {
+                detectRetina: true,
+                pixelated: false
+            },
+            updateMapSettings: (newSettings) => set((state) => ({
+                mapSettings: { ...state.mapSettings, ...newSettings }
+            })),
             mapLayer: 'sectional',
             setMapLayer: (layer) => set({ mapLayer: layer }),
             setUser: async (user) => {
