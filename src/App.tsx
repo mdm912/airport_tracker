@@ -27,6 +27,10 @@ function App() {
     }
   }, [user, isSharedView, loadUserAirports, syncAirports, setSharedView, setAirports]);
 
+
+
+
+
   const isSharedInUrl = new URLSearchParams(window.location.search).has('share');
 
   return (
@@ -51,6 +55,7 @@ function App() {
           </button>
         </div>
       )}
+
       <div className="flex-1 relative">
         <MapComponent />
         {!isSharedInUrl && <AirportControls />}

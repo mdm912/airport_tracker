@@ -16,7 +16,78 @@ let DefaultIcon = L.icon({
     iconAnchor: [12, 41]
 });
 
+// Final Tightened Bounds via erosion-based isolation (Zoom 11)
+// Regularized to ensure horizontal borders and full coverage.
+const PORTLAND_TAC_BOUNDS = new L.LatLngBounds(
+    [45.195103, -123.191757], // SW (using westernmost and southernmost)
+    [46.016516, -122.067719]  // NE (using easternmost and northernmost)
+);
+
+// Final Precision Legend-Free Trapezoid
+const PORTLAND_TAC_POLYGON: L.LatLngExpression[] = [
+    [46.016039, -123.191757], // NW
+    [46.016516, -122.067719], // NE
+    [45.200425, -122.075958], // SE
+    [45.195103, -123.184204]  // SW
+];
+
+interface ClippedTileLayerProps extends L.TileLayerOptions {
+    url: string;
+    polygon: L.LatLngExpression[];
+}
+
+const ClippedTileLayer: React.FC<ClippedTileLayerProps> = ({ url, polygon, ...options }) => {
+    const map = useMap();
+    const layerRef = useRef<L.TileLayer>(null);
+
+    useEffect(() => {
+        const updateClipPath = () => {
+            const layer = layerRef.current;
+            if (!layer) return;
+
+            const container = (layer as any)._container as HTMLElement;
+            if (!container) return;
+
+            // Important: Leaflet moves the container via CSS Transform (DomUtil.getPosition/setPosition)
+            // To clip correctly, we need the points relative to the container itself.
+            const containerPos = L.DomUtil.getPosition(container);
+
+            const clipPoints = polygon.map(latlng => {
+                const p = map.latLngToLayerPoint(latlng);
+                return {
+                    x: p.x - containerPos.x,
+                    y: p.y - containerPos.y
+                };
+            });
+
+            const path = `polygon(${clipPoints.map(p => `${Math.round(p.x)}px ${Math.round(p.y)}px`).join(', ')})`;
+            (container.style as any).clipPath = path;
+            (container.style as any).webkitClipPath = path; // For broader compatibility
+
+        };
+
+        map.on('move zoom viewreset', updateClipPath);
+
+        // Initial sync with retries to ensure Leaflet has created the container
+        let retries = 0;
+        const interval = setInterval(() => {
+            updateClipPath();
+            if (retries++ > 10 || (layerRef.current && (layerRef.current as any)._container)) {
+                clearInterval(interval);
+            }
+        }, 100);
+
+        return () => {
+            map.off('move zoom viewreset', updateClipPath);
+            clearInterval(interval);
+        };
+    }, [map, polygon]);
+
+    return <TileLayer ref={layerRef} url={url} {...options} />;
+};
+
 L.Marker.prototype.options.icon = DefaultIcon;
+
 
 const FocusHandler: React.FC<{ markerRefs: React.MutableRefObject<Map<string, L.Marker>> }> = ({ markerRefs }) => {
     const map = useMap();
@@ -139,7 +210,7 @@ const VFRTileLayer: React.FC = () => {
 const TACTileLayer: React.FC = () => {
     const { mapSettings } = useAirportStore();
     return (
-        <TileLayer
+        <ClippedTileLayer
             key={`tac-${mapSettings.detectRetina}-${mapSettings.pixelated}`}
             attribution='FAA Terminal Area Charts &copy; <a href="https://www.faa.gov">FAA</a>'
             url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Terminal/MapServer/tile/{z}/{y}/{x}"
@@ -150,9 +221,12 @@ const TACTileLayer: React.FC = () => {
             zIndex={101}
             detectRetina={mapSettings.detectRetina}
             className={mapSettings.pixelated ? "pixelated-tiles" : ""}
+            bounds={PORTLAND_TAC_BOUNDS}
+            polygon={PORTLAND_TAC_POLYGON}
         />
     );
 };
+
 
 const MapComponent: React.FC = () => {
     const { airports, removeAirport, mapLayer } = useAirportStore();
