@@ -16,20 +16,7 @@ let DefaultIcon = L.icon({
     iconAnchor: [12, 41]
 });
 
-// Final Tightened Bounds via erosion-based isolation (Zoom 11)
-// Regularized to ensure horizontal borders and full coverage.
-const PORTLAND_TAC_BOUNDS = new L.LatLngBounds(
-    [45.195103, -123.191757], // SW (using westernmost and southernmost)
-    [46.016516, -122.067719]  // NE (using easternmost and northernmost)
-);
-
-// Final Precision Legend-Free Trapezoid
-const PORTLAND_TAC_POLYGON: L.LatLngExpression[] = [
-    [46.016039, -123.191757], // NW
-    [46.016516, -122.067719], // NE
-    [45.200425, -122.075958], // SE
-    [45.195103, -123.184204]  // SW
-];
+import { TAC_CHARTS } from '../data/tacBounds';
 
 interface ClippedTileLayerProps extends L.TileLayerOptions {
     url: string;
@@ -186,7 +173,30 @@ const CustomZoomControl: React.FC = () => {
     );
 };
 
+const UrlPositioner: React.FC = () => {
+    const map = useMap();
+    const { setMapLayer } = useAirportStore();
 
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tacParam = urlParams.get('tac');
+        const latParam = urlParams.get('lat');
+        const lngParam = urlParams.get('lng');
+        const zoomParam = urlParams.get('zoom');
+
+        if (tacParam) {
+            const tac = TAC_CHARTS.find(t => t.id === tacParam.toUpperCase());
+            if (tac && tac.bounds) {
+                map.fitBounds(tac.bounds as L.LatLngBoundsExpression);
+                setMapLayer('sectional');
+            }
+        } else if (latParam && lngParam && zoomParam) {
+            map.setView([parseFloat(latParam), parseFloat(lngParam)], parseInt(zoomParam, 10));
+        }
+    }, [map, setMapLayer]);
+
+    return null;
+};
 
 const VFRTileLayer: React.FC = () => {
     const { mapSettings } = useAirportStore();
@@ -210,20 +220,24 @@ const VFRTileLayer: React.FC = () => {
 const TACTileLayer: React.FC = () => {
     const { mapSettings } = useAirportStore();
     return (
-        <ClippedTileLayer
-            key={`tac-${mapSettings.detectRetina}-${mapSettings.pixelated}`}
-            attribution='FAA Terminal Area Charts &copy; <a href="https://www.faa.gov">FAA</a>'
-            url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Terminal/MapServer/tile/{z}/{y}/{x}"
-            minZoom={10}
-            maxZoom={22}
-            maxNativeZoom={11}
-            opacity={1}
-            zIndex={101}
-            detectRetina={mapSettings.detectRetina}
-            className={mapSettings.pixelated ? "pixelated-tiles" : ""}
-            bounds={PORTLAND_TAC_BOUNDS}
-            polygon={PORTLAND_TAC_POLYGON}
-        />
+        <>
+            {TAC_CHARTS.map(tac => (
+                <ClippedTileLayer
+                    key={`tac-${tac.id}-${mapSettings.detectRetina}-${mapSettings.pixelated}`}
+                    attribution='FAA Terminal Area Charts &copy; <a href="https://www.faa.gov">FAA</a>'
+                    url="https://tiles.arcgis.com/tiles/ssFJjBXIUyZDrSYZ/arcgis/rest/services/VFR_Terminal/MapServer/tile/{z}/{y}/{x}"
+                    minZoom={10}
+                    maxZoom={22}
+                    maxNativeZoom={11}
+                    opacity={1}
+                    zIndex={101}
+                    detectRetina={mapSettings.detectRetina}
+                    className={mapSettings.pixelated ? "pixelated-tiles" : ""}
+                    bounds={tac.bounds}
+                    polygon={tac.polygon}
+                />
+            ))}
+        </>
     );
 };
 
@@ -236,6 +250,7 @@ const MapComponent: React.FC = () => {
         <div className="h-full w-full relative z-0">
             <MapContainer center={[47.5, -122.2]} zoom={8} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full" zoomControl={false}>
                 <FocusHandler markerRefs={markerRefs} />
+                <UrlPositioner />
                 <CustomZoomControl />
                 {/* Base Layer (OSM fallback) */}
                 <TileLayer
