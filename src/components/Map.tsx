@@ -5,16 +5,25 @@ import { useAirportStore } from '../store/useAirportStore';
 import L from 'leaflet';
 import { Plus, Minus } from 'lucide-react';
 
-// Fix for default marker icon in Leaflet with Webpack/Vite
-import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-let DefaultIcon = L.icon({
-    iconUrl: icon,
-    shadowUrl: iconShadow,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41]
-});
+const makeColoredIcon = (color: string) =>
+    L.divIcon({
+        html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 41" width="25" height="41">
+  <path fill="${color}" stroke="#fff" stroke-width="1.5"
+    d="M12.5 0C5.6 0 0 5.6 0 12.5c0 9.4 12.5 28.5 12.5 28.5S25 21.9 25 12.5C25 5.6 19.4 0 12.5 0z"/>
+  <circle fill="rgba(255,255,255,0.4)" cx="12.5" cy="12.5" r="5"/>
+</svg>`,
+        className: '',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowUrl: iconShadow,
+        shadowSize: [41, 41],
+    });
+
+const visitedIcon = makeColoredIcon('#f97316');   // orange-500
+const wishlistIcon = makeColoredIcon('#14b8a6');  // teal-500
 
 import { TAC_CHARTS } from '../data/tacBounds';
 
@@ -73,7 +82,7 @@ const ClippedTileLayer: React.FC<ClippedTileLayerProps> = ({ url, polygon, ...op
     return <TileLayer ref={layerRef} url={url} {...options} />;
 };
 
-L.Marker.prototype.options.icon = DefaultIcon;
+
 
 
 const FocusHandler: React.FC<{ markerRefs: React.MutableRefObject<Map<string, L.Marker>> }> = ({ markerRefs }) => {
@@ -270,6 +279,7 @@ const MapComponent: React.FC = () => {
                     <Marker
                         key={airport.id}
                         position={[airport.lat, airport.lng]}
+                        icon={airport.type === 'visited' ? visitedIcon : wishlistIcon}
                         ref={(ref) => {
                             if (ref) {
                                 markerRefs.current.set(airport.id, ref);
@@ -282,7 +292,7 @@ const MapComponent: React.FC = () => {
                             <div className="min-w-[120px]">
                                 <div className="font-bold flex justify-between items-center mb-1">
                                     <span>{airport.code}</span>
-                                    <span className={`h-2 w-2 rounded-full ${airport.type === 'visited' ? 'bg-green-500' : 'bg-blue-500'}`}></span>
+                                    <span className={`h-2 w-2 rounded-full ${airport.type === 'visited' ? 'bg-orange-500' : 'bg-teal-500'}`}></span>
                                 </div>
                                 <div className="text-sm mb-2">{airport.name}</div>
                                 <div className="text-[10px] uppercase font-bold text-gray-500 mb-2">{airport.type}</div>
