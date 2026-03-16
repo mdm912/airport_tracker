@@ -207,6 +207,38 @@ const UrlPositioner: React.FC = () => {
     return null;
 };
 
+const MAP_STATE_KEY = 'airport_tracker_map_state';
+
+const MapStatePersister: React.FC = () => {
+    const map = useMap();
+
+    useEffect(() => {
+        const save = () => {
+            const center = map.getCenter();
+            localStorage.setItem(MAP_STATE_KEY, JSON.stringify({
+                lat: center.lat,
+                lng: center.lng,
+                zoom: map.getZoom()
+            }));
+        };
+        map.on('moveend zoomend', save);
+        return () => { map.off('moveend zoomend', save); };
+    }, [map]);
+
+    return null;
+};
+
+const getSavedMapState = (): { center: [number, number]; zoom: number } => {
+    try {
+        const raw = localStorage.getItem(MAP_STATE_KEY);
+        if (raw) {
+            const { lat, lng, zoom } = JSON.parse(raw);
+            return { center: [lat, lng], zoom };
+        }
+    } catch { /* ignore */ }
+    return { center: [47.5, -122.2], zoom: 8 };
+};
+
 const VFRTileLayer: React.FC = () => {
     const { mapSettings } = useAirportStore();
     return (
@@ -254,11 +286,13 @@ const TACTileLayer: React.FC = () => {
 const MapComponent: React.FC = () => {
     const { airports, removeAirport, mapLayer } = useAirportStore();
     const markerRefs = useRef<Map<string, L.Marker>>(new Map());
+    const { center, zoom } = getSavedMapState();
 
     return (
         <div className="h-full w-full relative z-0">
-            <MapContainer center={[47.5, -122.2]} zoom={8} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full" zoomControl={false}>
+            <MapContainer center={center} zoom={zoom} minZoom={4} maxZoom={12} scrollWheelZoom={true} className="h-full w-full" zoomControl={false}>
                 <FocusHandler markerRefs={markerRefs} />
+                <MapStatePersister />
                 <UrlPositioner />
                 <CustomZoomControl />
                 {/* Base Layer (OSM fallback) */}
